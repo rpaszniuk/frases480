@@ -35,7 +35,7 @@ yarn-debug.log*
 
 /config/credentials/development.key
 /db/schema.rb
-public/sitemaps/
+/public/sitemaps/
 
 /config/database.yml
 /config/secrets.yml
@@ -43,4 +43,4 @@ public/sitemaps/
 /config/shards.yml
 
 /Gemfile.lock
-/sitemap.xml.gz
+/public/sitemap.xml.gz
