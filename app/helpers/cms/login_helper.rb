@@ -1,0 +1,2 @@
+module CMS::LoginHelper
+end

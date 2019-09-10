@@ -1,0 +1,2 @@
+module CMS::AccessProfilesHelper
+end

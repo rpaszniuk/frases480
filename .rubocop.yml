@@ -1,0 +1,36 @@
+Metrics/LineLength:
+  # This will disable the rule completely, regardless what other options you put
+  Enabled: false
+  # Change the default 80 chars limit value
+  Max: 12000000
+  # If you want the rule only apply to a specific folder/file
+  Include:
+    - 'app/**/*'
+  # If you want the rule not to apply to a specific folder/file
+  Exclude:
+    - 'db/schema.rb'
+Metrics/ClassLength:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Enabled: false
+Metrics/PerceivedComplexity:
+  Enabled: false
+Metrics/BlockLength:
+  Enabled: false
+Style/RedundantSelf:
+  Enabled: false
+Style/SymbolArray:
+  Enabled: true
+  EnforcedStyle: 'brackets'
+Style/Documentation:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  EnforcedStyle: 'compact'
+Metrics/MethodLength:
+  Enabled: false
+Metrics/AbcSize:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Bundler/OrderedGems:
+  Enabled: false

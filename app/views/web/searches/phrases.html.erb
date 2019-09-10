@@ -1,0 +1,23 @@
+<h3>Frases con el patrón de búsqueda: <%= params[:q] %></h3>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Frases480-Adaptable2 -->
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5138128404282138"
+data-ad-slot="8264966715"
+data-ad-format="auto"></ins>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+</script><br>
+<% if !@results.empty? %>
+<% @results.each do |phrase| %>
+  <%= render 'web/partials/phrase', phrase: phrase %>
+<% end %>
+<div class="d-flex justify-content-center">
+  <%= will_paginate_web @results %>
+</div>
+<% else %>   
+<div class="alert alert-warning">   
+  <h4>No hay frases que coincidan con el patrón de búsqueda ingresado...</h4>     
+</div>
+<% end %>

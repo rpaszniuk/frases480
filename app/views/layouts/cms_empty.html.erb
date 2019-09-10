@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= cms_page_title_tag %></title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>    
+  <%= stylesheet_link_tag 'cms', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_pack_tag 'cms' %>
+</head>
+<body>
+  <%= yield %>
+  <%= javascript_pack_tag 'cms', 'data-turbolinks-track': 'reload' %>
+</body>
+</html>

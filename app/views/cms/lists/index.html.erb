@@ -1,0 +1,92 @@
+<div class='row page-title-row'>
+  <div class='col'>
+    <h1>Browse Lists</h1>
+  </div>
+  <div class='col-auto'>
+    <div class='d-table h-100'>
+      <div class='d-table-cell align-middle'>
+        <%= create_link_to :lists, 'Create New', :new_list, class: 'btn btn-info' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-md-12'>
+    <div class='card'>
+      <div class='card-header'>
+        <div class='row'>
+          <div class='col-md-3'>
+            <h6>Browse Lists</h6>
+          </div>
+          <div class='offset-md-6 col-md-3'>
+            <%= link_to t('.export'), lists_path(format: :csv, q: params[:q].to_enum.to_h, page: params[:page]), class: 'btn btn-primary float-right' %>
+          </div>
+        </div>
+      </div>
+      <div class='card-body'>
+        <%= search_form_for @search, html: {class: ''} do |f| %>
+          <div class='form-row'>
+              <div class='form-group col-md-3'>
+                <%= f.select :status_cont, options_for_select(@statuses.keys, selected: params[:q][:status_cont]), {include_blank: t('models.list.status.include_blank')}, {class: 'form-control mb-3 mr-sm-3'} %>
+              </div>
+              <div class='form-group col-md-3'>
+                <%= f.text_field :tags_name_cont, class: 'form-control mb-3 mr-sm-3', placeholder: 'Keywords' %>
+              </div>
+              <div class='form-group  col-md-3'>
+                <div class='form-check'>
+                  <%= f.check_box :show_as_related_eq, {class: 'form-check-input form-list-check'} %>
+                  <%= f.label :show_as_related_eq, {class: 'form-check-label'} %>
+                </div>
+              </div>
+              <div class='form-group col-md-3'>
+                <%= f.submit 'Search', class: 'btn btn-primary mb-2' %>
+              </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-md-12'>
+    <% if !@lists.blank? && @lists.length > 0 -%>
+    <table class='table table-responsive-sm table-striped'>
+      <thead>
+        <tr>
+          <th><%= sort_link @search, :id, '#' %></th>
+          <th><%= sort_link @search, :name %></th>
+          <th><%= sort_link @search,  nil, 'Tag Line' %></th>
+          <th><%= sort_link @search, :status %></th>
+          <th><%= sort_link @search, :credits_on %></th>
+          <th>.csv</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @lists.each do |list| -%>
+        <tr>
+          <td><%= list.id %></td>
+          <td><%= edit_link_to :lists, list.name, edit_list_path(list) %></td>
+          <td>
+            <%= image_tag(url_for(list.logo)) if list.logo.attached? %>
+            <p><%= list.tag_names %></p>
+            </td>
+          <td><%= object_status_label(list) %></td>
+          <td>
+            <%= yes_or_no_label(list.credits_on) %>
+          </td>
+          <td>
+            <%= link_to fa_icon('download'), list_path(list, format: :csv) %>
+          </td>
+        </tr>
+        <% end -%>
+      </tbody>
+    </table>
+    <div class='d-flex justify-content-center'>
+      <%= paginate(@lists) %>
+    </div>
+    <% else -%>
+    <div class='alert alert-info' role='alert'>No lists found.</div>
+    <% end -%>
+  </div>
+</div>

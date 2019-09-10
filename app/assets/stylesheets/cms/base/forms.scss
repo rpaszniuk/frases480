@@ -1,0 +1,43 @@
+.input-group {
+  .has-error {
+    width: 100%;
+    .help-block {
+      margin-bottom: 0;
+      font-size: 0.9em;
+      color: $error_red;
+    }
+  }
+}
+
+.control-label {
+  font-weight: 600;
+}
+
+.has-error {
+  .form-control {
+    border-color: $error_red;
+  }
+  .help-block {
+    font-size: 0.9em;
+    color: $error_red;
+  }
+  .input-group-text {
+    border-color: $error_red;
+  }
+}
+
+.form-loader {
+  margin-top: 5px;
+}
+
+.birth-date-dropdowns {
+  select {
+    display: inline-block;
+    width: 150px;
+    margin-right: 10px;
+  }
+}
+
+.form-static {
+  display: form;
+}

@@ -1,0 +1,39 @@
+<% if !@phrase.nil? %>
+<% if @phrase.active? %>
+<div class="card">
+  <!-- Default panel contents -->
+  <div class="card-header">Frase de <%= link_to @phrase.category.name, web_show_category_path(@phrase.category.slug) %></div>            
+  <div class="card-body">   
+    <h4><%= @phrase.phrase %></h4>
+  </div>
+  <div class="card-footer text-right">
+    <div class="addthis_native_toolbox"></div>
+  </div>    
+</div> 
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Frases480-Adaptable2 -->
+<ins class="adsbygoogle"
+style="display:block"
+data-ad-client="ca-pub-5138128404282138"
+data-ad-slot="8264966715"
+data-ad-format="auto"></ins>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+</script><br>                        
+<div class="card bg-light">
+  <div id="fb-root"></div>   
+  <div class="card-header"><h3>Comentarios: <fb:comments-count href="<%= request.original_url %>"></fb:comments-count></h3></div>
+  <div class="card-body"> 
+    <%= content_tag :div, '', :class => "fb-comments", "data-href" => request.original_url, "data-numposts" => "10",  "data-width" => "100%", "data-colorscheme" => "light" %>
+  </div>
+</div>
+<% else %> 
+<div class="alert alert-info">   
+  <h4>La frase no está habilitada..</h4>     
+</div> 
+<% end %>           
+<% else %>   
+<div class="alert alert-danger">   
+  <h4>No existe la frase...</h4>     
+</div>
+<% end %>

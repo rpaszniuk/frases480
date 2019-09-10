@@ -1,0 +1,2 @@
+module CMS::DashboardHelper
+end
