@@ -1,0 +1,1 @@
+Redis.current = Redis.new(host: Newfrases480::Application.credentials.redis[:host], port: Newfrases480::Application.credentials.redis[:port], connect_timeout: 5, timeout: 5, driver: :hiredis, thread_safe: true)

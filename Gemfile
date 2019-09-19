@@ -23,6 +23,7 @@ gem 'will_paginate', '~> 3.1.0'
 # gem 'rmagick'
 # gem 'mini_magick'
 gem 'redis', '~> 4.1'
+gem 'hiredis', '~> 0.6.3'
 gem 'sitemap_generator'
 
 group :development, :test do

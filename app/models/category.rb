@@ -9,6 +9,7 @@ class Category < ApplicationRecord
 
   before_validation :set_slug_if_empty
   before_save :clean_stuff
+  after_save :clear_cache
 
   def title
     name
@@ -22,5 +23,9 @@ class Category < ApplicationRecord
 
   def clean_stuff
     self.slug = self.slug.parameterize
+  end
+
+  def clear_cache
+    CacheEngine.del('web_categories')
   end
 end

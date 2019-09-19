@@ -2,7 +2,8 @@ class WEB::MainController < ApplicationController
   include WEBAccessControl
 
   def index
-    @categories = Category.active.order(:slug)
+    @cache_engine = CacheEngine.new
+    @categories = @cache_engine.web_categories
     @phrases = Phrase.active.order(id: :desc).includes(:category).paginate(page: params[:page], per_page: 15)
   end
 
@@ -11,13 +12,15 @@ class WEB::MainController < ApplicationController
   end
 
   def sitemap
-    @phrases = Phrase.active.includes(:category)
-    @categories = Category.active
+    @cache_engine = CacheEngine.new
+    @categories = @cache_engine.web_categories
+    @phrases = Phrase.active.order(id: :desc).includes(:category)
     render template: 'web/main/sitemap.xml.builder', layout: false
   end
 
   def feed
-    @phrases = Phrase.active.includes(:category).order(id: :desc).limit(15)
+    @cache_engine = CacheEngine.new
+    @phrases = @cache_engine.web_last_phrases
     render template: 'web/main/feed.rss.builder', layout: false
   end
 end
