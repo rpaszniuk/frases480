@@ -30,11 +30,57 @@ module CacheEngine::Global
     cache_data
   end
 
-  def web_last_phrases
-    cache_key = 'web_last_phrases'
+  def web_categories_count
+    cache_key = 'web_categories_count'
     cache_data = CacheEngine.get(cache_key)
     if cache_data.nil?
-      cache_data = Phrase.active.order(id: :desc).includes(:category).limit(15).to_a
+      cache_data = Category.active.count.to_i
+      CacheEngine.set(cache_key, cache_data, 12.hours)
+    end
+    cache_data
+  end
+
+  def web_phrases(page)
+    page = page.blank? ? 1 : page.to_i
+    return [] if page.zero?
+
+    cache_key = "web_phrases_page_#{page}"
+    cache_data = CacheEngine.get(cache_key)
+    if cache_data.nil?
+      cache_data = Phrase.active.order(id: :desc).includes(:category).paginate(page: page, per_page: 15).to_a
+      CacheEngine.set(cache_key, cache_data, page == 1 ? 12.hours : 5.minutes)
+    end
+    cache_data
+  end
+
+  def web_phrases_count
+    cache_key = 'web_phrases_count'
+    cache_data = CacheEngine.get(cache_key)
+    if cache_data.nil?
+      cache_data = Phrase.active.count.to_i
+      CacheEngine.set(cache_key, cache_data, 12.hours)
+    end
+    cache_data
+  end
+
+  def web_category_phrases(category, page)
+    page = page.blank? ? 1 : page.to_i
+    return [] if page.zero?
+
+    cache_key = "web_#{category.id}_phrases_page_#{page}"
+    cache_data = CacheEngine.get(cache_key)
+    if cache_data.nil?
+      cache_data = Phrase.active.order(id: :desc).includes(:category).paginate(page: page, per_page: 15).to_a
+      CacheEngine.set(cache_key, cache_data, page == 1 ? 12.hours : 5.minutes)
+    end
+    cache_data
+  end
+
+  def web_category_phrases_count(category)
+    cache_key = "web_#{category.id}_phrases_count"
+    cache_data = CacheEngine.get(cache_key)
+    if cache_data.nil?
+      cache_data = category.phrases.active.count.to_i
       CacheEngine.set(cache_key, cache_data, 12.hours)
     end
     cache_data

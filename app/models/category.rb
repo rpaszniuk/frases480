@@ -27,5 +27,6 @@ class Category < ApplicationRecord
 
   def clear_cache
     CacheEngine.del('web_categories')
+    CacheEngine.del('web_categories_count')
   end
 end

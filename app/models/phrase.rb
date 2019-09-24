@@ -11,6 +11,7 @@ class Phrase < ApplicationRecord
 
   before_validation :set_slug_if_empty
   before_save :clean_stuff
+  after_save :clear_cache, if: -> { active? }
 
   def title
     "#{category.description}: #{phrase.split(' ').first(10).join(' ')}..."
@@ -28,5 +29,12 @@ class Phrase < ApplicationRecord
 
   def clean_stuff
     self.slug = self.slug.parameterize
+  end
+
+  def clear_cache
+    CacheEngine.wildcard_del('web_phrases_page_*')
+    CacheEngine.wildcard_del("web_#{self.category_id}_phrases_page_*")
+    CacheEngine.del('web_phrases_count')
+    CacheEngine.del("web_#{self.category_id}_phrases_count")
   end
 end

@@ -5,7 +5,8 @@ class WEB::CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.order(:name)
+    @cache_engine = CacheEngine.new
+    @categories = @cache_engine.web_categories
     respond_to do |format|
       format.html { redirect_to web_root_path }
       format.json {}
@@ -15,9 +16,10 @@ class WEB::CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
+    @cache_engine = CacheEngine.new
     @page_title = @category.title
-    @phrases = @category.phrases.active.paginate(page: params[:page], per_page: 15)
-    @phrases_count = @category.phrases.active.count
+    @phrases = @cache_engine.web_category_phrases(@category, params[:page])
+    @phrases_count = @cache_engine.web_category_phrases_count(@category)
   end
 
   private

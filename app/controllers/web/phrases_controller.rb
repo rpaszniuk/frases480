@@ -5,8 +5,9 @@ class WEB::PhrasesController < ApplicationController
   # GET /phrases
   # GET /phrases.json
   def index
-    @phrases = Phrase.active.order(id: :desc).includes(:category).paginate(page: params[:page], per_page: 15)
-    @phrases_count = Phrase.active.count
+    @cache_engine = CacheEngine.new
+    @phrases = @cache_engine.web_phrases(params[:page])
+    @phrases_count = @cache_engine.web_phrases_count
     respond_to do |format|
       format.html { redirect_to web_root_path }
       format.json {}

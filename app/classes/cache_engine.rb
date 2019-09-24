@@ -3,7 +3,7 @@ class CacheEngine
 
   def self.get(key)
     data = Redis.current.get(key)
-    # Rails.logger.info("[CACHE] GET #{key} -> #{data.nil? ? 'missed' : 'ok'}")
+    Rails.logger.info("[CACHE] GET #{key} -> #{data.nil? ? 'missed' : 'ok'}")
     return nil unless data
 
     begin
@@ -23,5 +23,12 @@ class CacheEngine
 
   def self.del(key)
     Redis.current.del(key)
+  end
+
+  def self.wildcard_del(wildcard)
+    keys = Redis.current.keys(wildcard)
+    keys.each do |key|
+      Redis.current.del(key)
+    end
   end
 end
