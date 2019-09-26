@@ -74,18 +74,7 @@
     data-ad-format="auto"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>     
-    <% unless @phrases.empty? %>
-    <% @phrases.each do |phrase| %>
-      <%= render 'web/partials/phrase', phrase: phrase %>
-    <% end %>  
-    <div class="d-flex justify-content-center">
-      <%= will_paginate_web(@phrases) %>
-    </div>
-    <% else %>   
-    <div class="alert alert-info">   
-      <h4>No hay frases añadidas...</h4>     
-    </div>
-    <% end %>
+    </script>
+    <%= render 'web/partials/phrases', phrases: @phrases %>
   </div>
 </div>

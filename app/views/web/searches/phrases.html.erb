@@ -8,16 +8,6 @@ data-ad-slot="8264966715"
 data-ad-format="auto"></ins>
 <script>
   (adsbygoogle = window.adsbygoogle || []).push({});
-</script><br>
-<% if !@results.empty? %>
-<% @results.each do |phrase| %>
-  <%= render 'web/partials/phrase', phrase: phrase %>
-<% end %>
-<div class="d-flex justify-content-center">
-  <%= will_paginate_web @results %>
-</div>
-<% else %>   
-<div class="alert alert-warning">   
-  <h4>No hay frases que coincidan con el patrón de búsqueda ingresado...</h4>     
-</div>
-<% end %>
+</script>
+<%= render 'web/partials/phrases', phrases: @results %>
+

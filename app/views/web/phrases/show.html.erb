@@ -1,5 +1,4 @@
-<% if !@phrase.nil? %>
-<% if @phrase.active? %>
+<% if @phrase.active? -%>
 <div class="card">
   <!-- Default panel contents -->
   <div class="card-header">Frase de <%= link_to @phrase.category.name, web_show_category_path(@phrase.category.slug) %></div>            
@@ -27,13 +26,8 @@ data-ad-format="auto"></ins>
     <%= content_tag :div, '', :class => "fb-comments", "data-href" => request.original_url, "data-numposts" => "10",  "data-width" => "100%", "data-colorscheme" => "light" %>
   </div>
 </div>
-<% else %> 
+<% else -%> 
 <div class="alert alert-info">   
   <h4>La frase no está habilitada..</h4>     
 </div> 
-<% end %>           
-<% else %>   
-<div class="alert alert-danger">   
-  <h4>No existe la frase...</h4>     
-</div>
 <% end %>

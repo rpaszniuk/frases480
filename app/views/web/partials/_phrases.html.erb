@@ -1,0 +1,20 @@
+<% unless phrases.empty? %>
+<% phrases.each do |phrase| %>
+  <div class="card">
+    <div class="card-header">Frase de <%= link_to phrase.category.name, web_show_category_path(phrase.category.slug) %></div>
+    <div class="card-body">  
+      <h4><%= phrase.phrase %></h4>
+    </div>
+    <div class="card-footer text-right">
+      <%= link_to 'Compartir / Comentar', web_show_phrase_path(phrase.category.slug, phrase.slug), class: "badge badge-primary" %>
+    </div>    
+  </div>
+<% end %>  
+<div class="d-flex justify-content-center">
+  <%= will_paginate_web(phrases) %>
+</div>
+<% else %>   
+<div class="alert alert-info">   
+  <h4>No hay frases añadidas...</h4>     
+</div>
+<% end %>
