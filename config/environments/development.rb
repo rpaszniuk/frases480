@@ -67,4 +67,8 @@ Rails.application.configure do
   config.hosts << 'frases480.local'
   config.hosts << 'cms.frases480.local'
   config.hosts << 'api.frases480.local'
+  config.hosts << 'www.frases480.com'
+  config.hosts << 'frases480.com'
+  config.hosts << 'cms.frases480.com'
+  config.hosts << 'api.frases480.com'
 end
