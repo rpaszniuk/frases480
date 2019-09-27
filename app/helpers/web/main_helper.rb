@@ -33,7 +33,7 @@ module WEB::MainHelper
         unless @phrase.nil?
           code << %(<meta name="description" content="#{ActionView::Base.full_sanitizer.sanitize(@phrase.phrase.truncate(140)).squish}"/>\n)
           code << %(<meta name="og:url" content="#{web_show_phrase_url(@phrase.category.slug, @phrase.slug)}"/>\n)
-          code << %(<meta name="og:title" content="#{strip_tags(@phrase.title).tr('\"', '')}"/>\n)
+          code << %(<meta name="og:title" content="#{strip_tags(@phrase.title_for_share).tr('\"', '')}"/>\n)
           code << %(<meta name="og:description" content="#{ActionView::Base.full_sanitizer.sanitize(@phrase.phrase.truncate(140)).squish}"/>\n)
           # code << %(<meta name="og:image" content=""/>)
           code << %(<link rel="canonical" href="#{web_show_phrase_url(@phrase.category.slug, @phrase.slug)}"/>)

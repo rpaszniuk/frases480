@@ -17,6 +17,10 @@ class Phrase < ApplicationRecord
     "#{category.description}: #{phrase.split(' ').first(10).join(' ')}..."
   end
 
+  def title_for_share
+    "Frase de #{category.description}"
+  end
+
   def generate_slug
     ActiveSupport::Inflector.transliterate(self.phrase).gsub(/[^a-zA-Z0-9 ]/, '').split(' ').first(10).join(' ')
   end
