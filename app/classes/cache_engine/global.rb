@@ -71,7 +71,7 @@ module CacheEngine::Global
     cache_data = CacheEngine.get(cache_key)
     if cache_data.nil?
       cache_data = category.phrases.active.order(id: :desc).paginate(page: page, per_page: 15).to_a
-      CacheEngine.set(cache_key, cache_data, page == 1 ? 6.hours : 2.minutes)
+      CacheEngine.set(cache_key, cache_data, page == 1 ? 3.hours : 2.minutes)
     end
     cache_data
   end
