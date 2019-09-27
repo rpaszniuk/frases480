@@ -8,7 +8,7 @@ gem 'mysql2', '>= 0.4.4', '< 0.6.0'
 
 # gem 'mini_racer', '~> 0.2.6'
 # gem 'bootstrap', '~> 4.3.1'
-# gem 'sass-rails', '~> 5'
+gem 'sass-rails', '~> 5'
 gem 'webpacker', '~> 4.0'
 gem 'jbuilder'
 # gem 'turbolinks', '~> 5'
