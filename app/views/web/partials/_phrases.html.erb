@@ -1,6 +1,6 @@
 <% unless phrases.empty? %>
 <% phrases.each do |phrase| %>
-  <div class="card">
+  <div class="card" style="margin-top: 10px;">
     <div class="card-header">Frase de <%= link_to phrase.category.name, web_show_category_path(phrase.category.slug) %></div>
     <div class="card-body">  
       <h4><%= phrase.phrase %></h4>
