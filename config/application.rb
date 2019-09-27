@@ -24,6 +24,10 @@ module Newfrases480
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
+    Raven.configure do |config|
+      config.dsn = 'https://ced6ad15e65f4acbbba2019335427c26:199092697f3844afbed69da14b4d195a@sentry.io/1763711'
+    end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading

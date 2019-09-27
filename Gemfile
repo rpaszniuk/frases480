@@ -25,6 +25,7 @@ gem 'will_paginate', '~> 3.1.0'
 gem 'redis', '~> 4.1'
 gem 'hiredis', '~> 0.6.3'
 gem 'sitemap_generator'
+gem 'sentry-raven'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
