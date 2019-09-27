@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Crontab: 0 */12 * * * /path/to/app/lib/cronjobs/refresh_sitemaps.sh
+# Crontab: 0 3 * * * /path/to/app/lib/cronjobs/refresh_sitemaps.sh
 
 # load rvm ruby
 source /home/rodrigo/.rvm/environments/default
