@@ -26,6 +26,7 @@ class WEB::PhrasesController < ApplicationController
     id_or_slug = params[:phrase].blank? ? params[:id] : params[:phrase]
     if id_or_slug.to_i != 0
       @phrase = Phrase.includes(:category).find(id_or_slug)
+      redirect_to web_show_phrase_path(@phrase.category.slug, @phrase.slug), status: 301
     else
       @phrase = Phrase.includes(:category).find_by!(slug: id_or_slug)
     end

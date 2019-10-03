@@ -28,6 +28,7 @@ class WEB::CategoriesController < ApplicationController
     id_or_slug = params[:id]
     if id_or_slug.to_i != 0
       @category = Category.find(id_or_slug)
+      redirect_to web_show_category_path(@category.slug), status: 301
     else
       @category = Category.find_by!(slug: id_or_slug)
     end
