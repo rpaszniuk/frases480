@@ -4,7 +4,6 @@ class User < ActiveRecord::Base
   has_one :secure_user
   has_many :phrases
 
-  attr_accessor :password
   accepts_nested_attributes_for :secure_user, allow_destroy: true
 
   has_one_attached :avatar
@@ -19,11 +18,8 @@ class User < ActiveRecord::Base
   validates :password, presence: true
 
   def password=(value)
-    if self.secure_user.nil?
-      self.secure_user = SecureUser.new(password: value)
-    else
-      self.secure_user.password = value
-    end
+    self.secure_user = SecureUser.new if self.secure_user.nil?
+    self.secure_user.password = value
   end
 
   def password

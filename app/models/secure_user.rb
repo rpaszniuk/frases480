@@ -8,11 +8,11 @@ class SecureUser < ActiveRecord::Base
   def authenticate(written_password)
     Digest::SHA256.hexdigest(written_password + self.password_salt) == self.password
   end
-  
+
   def generate_hash
     self.secure_hash = Digest::SHA1.hexdigest(self.digest_key + Time.now.to_i.to_s + self.user.email)
   end
-  
+
   def change_password
     self.password_salt = Digest::SHA1.hexdigest(self.user.email + self.digest_key + Time.now.to_s) if self.password_salt.blank?
     self.password = Digest::SHA256.hexdigest(self.password + self.password_salt) if self.password_changed?
