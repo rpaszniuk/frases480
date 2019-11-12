@@ -36,7 +36,7 @@ module CMS::MainHelper
   def cms_render_breadcrumbs
     return if @breadcrumbs.blank?
 
-    @breadcrumbs.insert(0, label: t('breadcrumbs.root'), url: dashboard_path)
+    @breadcrumbs.insert(0, label: t('breadcrumbs.root'), url: cms_dashboard_path)
     html = %(<ol class="breadcrumb">)
     @breadcrumbs[0..-2].each do |breadcrumb|
       html += breadcrumb[:url].blank? ? %(<li class="breadcrumb-item#{(' featured' if breadcrumb[:featured])}">#{breadcrumb[:label].html_safe}</li>) : %(<li class="breadcrumb-item#{(' featured' if breadcrumb[:featured])}">#{link_to(breadcrumb[:label].html_safe, breadcrumb[:url], breadcrumb[:options])}</li>)
@@ -91,12 +91,14 @@ module CMS::MainHelper
   end
 
   def cms_object_status_label(object, options = {})
+    print(object.class.name.underscore)
+    print("asgasgsag")
     case object.status
-    when 'draft', 'inactive'
+    when 'draft', 'inactive', 'pending'
       %(<span class="badge badge-info #{options[:class]}">#{t("models.#{object.class.name.underscore}.status.#{object.status}").upcase}</span>).html_safe
     when 'active', 'finished'
       %(<span class="badge badge-success #{options[:class]}">#{t("models.#{object.class.name.underscore}.status.#{object.status}").upcase}</span>).html_safe
-    when 'blocked', 'deleted'
+    when 'blocked', 'deleted', 'rejected'
       %(<span class="badge badge-danger #{options[:class]}">#{t("models.#{object.class.name.underscore}.status.#{object.status}").upcase}</span>).html_safe
     end
   end

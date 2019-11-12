@@ -12,7 +12,7 @@ class CMS::SessionsController < ApplicationController
   def logout
     reset_session
     session[:sess_user] = nil
-    flash[:notice] = t('alerts.logout')
+    flash[:notice] = t('alerts.cms.logout')
     redirect_to :cms_root
   end
 

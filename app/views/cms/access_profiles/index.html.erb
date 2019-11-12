@@ -1,11 +1,11 @@
 <div class="row page-title-row">
   <div class="col">
-    <h1>Access Profiles List</h1>
+    <h1>Lista de Perfiles de Acceso</h1>
   </div>
   <div class="col-auto">
     <div class="d-table h-100">
       <div class="d-table-cell align-middle">
-        <%= link_to 'Create New', :new_cms_access_profile, class: 'btn btn-info' %>
+        <%= link_to 'Crear Nuevo', :new_cms_access_profile, class: 'btn btn-info' %>
       </div>
     </div>
   </div>
@@ -15,7 +15,7 @@
     <div class="card">
       <%= form_tag :cms_access_profiles, method: :get, class: 'form-horizontal' do |form| %>
       <div class="card-body">
-        <%= text_field_tag :k, params[:k], class: 'form-control', placeholder: 'Search by Name' %>
+        <%= text_field_tag :k, params[:k], class: 'form-control', placeholder: 'Buscar por Nombre' %>
       </div>
       <div class="card-footer">
         <button class="btn btn-sm btn-primary" type="submit" data-disable-with="<%= t('basic.forms.searching') %>"><%= t('basic.forms.submit_search') %></button>
@@ -31,23 +31,25 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>Name</th>
+          <th>Nombre</th>
+          <th>Actualización</th>
         </tr>
       </thead>
       <tbody>
-        <% @access_profiles.each do |access_profile| -%>
+        <% for access_profile in @access_profiles -%>
         <tr>
           <td><%= access_profile.id %></td>
-          <td><%= link_to access_profile.name, edit_access_profile_path(access_profile) %></td>
+          <td><%= link_to access_profile.name, edit_cms_access_profile_path(access_profile) %></td>
+          <td><%= l(access_profile.updated_at, format: :complete) %></td>
         </tr>
         <% end -%>
       </tbody>
     </table>
     <div class="d-flex justify-content-center">
-      <%= will_paginate(@access_profiles) %>
+      <%= will_paginate_cms(@access_profiles) %>
     </div>
     <% else -%>
-    <div class="alert alert-info" role="alert">No Access Profiles found.</div>
+    <div class="alert alert-info" role="alert">No se han encontrado Perfiles de Acceso.</div>
     <% end -%>
   </div>
 </div>

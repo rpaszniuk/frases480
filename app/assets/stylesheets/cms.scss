@@ -1,6 +1,12 @@
-@import "web/base/variables";
-@import "web/base/mixins";
-@import "web/base/base";
-@import "web/base/forms";
-@import "web/base/cards";
-@import "web/base/tables";
+@import "cms/base/variables";
+@import "cms/base/mixins";
+
+@import "bootstrap";
+
+@import "theme/styles";
+@import "icheck/flat/blue";
+
+@import "cms/base/base";
+@import "cms/base/forms";
+@import "cms/base/cards";
+@import "cms/base/tables";

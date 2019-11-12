@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    <h1 class="page-title">Edit Access Profile</h1>
+    <h1 class="page-title">Editar Perfil de Acceso</h1>
   </div>
 </div>
 <div class="row">
@@ -11,7 +11,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="form-group">
-              <label class="control-label">Name</label>
+              <label class="control-label">Nombre</label>
               <%= form.text_field :name, class: 'form-control' %>
             </div>
           </div>
@@ -19,7 +19,7 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label class="control-label">Status</label>
+              <label class="control-label">Estado</label>
               <%= form.select :status, options_for_select(AccessProfile.statuses_map, selected: @access_profile.status, disabled: ['deleted']), {}, class: 'form-control' %>
             </div>
           </div>
@@ -27,10 +27,36 @@
         <div class="row permissions-ui">
           <div class="col-md-12">
             <div class="form-group">
-              <label class="control-label">Permissions</label>
+              <label class="control-label">Permisos</label>
               <div class="row">
                 <div class="col-md-6">
-                  <div class="namespace">Access Profiles</div>
+                  <div class="namespace">Categorías</div>
+                  <ul class="list-group">
+                    <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                      <strong>Full Access</strong>
+                      <label class="switch switch-text switch-pill switch-danger-outline-alt">
+                        <%= check_box_tag "access_profile[permissions][categories][full_access]", 1, @access_profile.permissions.dig('categories', 'full_access'), class: 'switch-input' %>
+                        <span class="switch-label" data-on="Si" data-off="No"></span>
+                        <span class="switch-handle"></span>
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <div class="namespace">Frases</div>
+                  <ul class="list-group">
+                    <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
+                      <strong>Full Access</strong>
+                      <label class="switch switch-text switch-pill switch-danger-outline-alt">
+                        <%= check_box_tag "access_profile[permissions][phrases][full_access]", 1, @access_profile.permissions.dig('phrases', 'full_access'), class: 'switch-input' %>
+                        <span class="switch-label" data-on="Si" data-off="No"></span>
+                        <span class="switch-handle"></span>
+                      </label>
+                    </li>
+                  </ul>
+                </div>                                
+                <div class="col-md-6">
+                  <div class="namespace">Perfiles de Acceso</div>
                   <ul class="list-group">
                     <li class="list-group-item d-flex list-group-item-action justify-content-between align-items-center">
                       <strong>Full Access</strong>
@@ -43,7 +69,7 @@
                   </ul>
                 </div>
                 <div class="col-md-6">
-                  <div class="namespace">Users</div>
+                  <div class="namespace">Usuarios</div>
                   <ul class="list-group">
                     <li class="list-group-item d-flex list-group-item-action justify-content-between">
                       <strong>Full Access</strong>
@@ -62,16 +88,16 @@
       </div>
       <div class="card-footer d-flex justify-content-between">
         <button class="btn btn-primary" type="submit" data-disable-with="<%= t('basic.forms.updating') %>"><%= t('basic.forms.submit_update') %></button>
-        <%= link_to delete_action_label(@access_profile), access_profile_path(@access_profile), method: :delete, data: { disable_with: t('basic.forms.deleting'), confirm: t('basic.forms.confirm') }, class: 'btn btn-danger' %>
+        <%= link_to cms_delete_action_label(@access_profile), cms_access_profile_path(@access_profile), method: :delete, data: { disable_with: t('basic.forms.deleting'), confirm: t('basic.forms.confirm') }, class: 'btn btn-danger', disabled: @access_profile.is_super_profile? %>
       </div>
       <% end %>
     </div>
   </div>
   <div class="col-md-4">
     <div class="card">
-      <div class="card-header">Status</div>
+      <div class="card-header">Estado</div>
       <div class="card-body text-center">
-        <h1 class="mt-3"><%= object_status_label(@access_profile) %></h1>
+        <h1 class="mt-3"><%= cms_object_status_label(@access_profile) %></h1>
       </div>
     </div>
   </div>

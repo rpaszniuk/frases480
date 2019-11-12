@@ -6,11 +6,12 @@
   <title><%= cms_page_title_tag %></title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>    
-  <%= stylesheet_link_tag 'cms', media: 'all', 'data-turbolinks-track': 'reload' %>
-  <%= stylesheet_pack_tag 'cms' %>
+  <%= stylesheet_link_tag 'cms', media: 'all' %>
+  <%#= stylesheet_pack_tag 'cms' %>
 </head>
 <body>
   <%= yield %>
-  <%= javascript_pack_tag 'cms', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'cms' %>
+  <%#= javascript_pack_tag 'cms' %>
 </body>
 </html>

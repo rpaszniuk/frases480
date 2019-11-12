@@ -1,70 +1,57 @@
-<div class='row page-title-row'>
-  <div class='col'>
-    <h1>Users List</h1>
+<div class="row page-title-row">
+  <div class="col">
+    <h1>Lista de Usuarios</h1>
   </div>
-  <div class='col-auto'>
-    <div class='d-table h-100'>
-      <div class='d-table-cell align-middle'>
-        <%= link_to 'Create New', :new_cms_user, class: 'btn btn-info' %>
+  <div class="col-auto">
+    <div class="d-table h-100">
+      <div class="d-table-cell align-middle">
+        <%= link_to 'Crear Nuevo', :new_cms_user, class: 'btn btn-info' %>
       </div>
     </div>
   </div>
 </div>
-<div class='row'>
-  <div class='col-md-12'>
-    <div class='card'>
-      <div class='card-header'>
-        <div class='row'>
-          <div class='col-md-3'>
-            <label><i class='fa fa-filter'></i> Filter for search</label>
-          </div>
-        </div>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <%= form_tag :cms_users, method: :get, class: 'form-horizontal' do |form| %>
+      <div class="card-body">
+        <%= text_field_tag :k, params[:k], class: 'form-control', placeholder: 'Buscar por Nombre' %>
       </div>
-      <div class='card-body'>
-        <%= search_form_for @search, html: {class: ''} do |f| %>
-          <div class='form-row'>
-            <div class='form-group col-md-3'>
-              <%= f.text_field :email_or_first_name_or_last_name_cont, 
-                  class: 'form-control mb-3 mr-sm-3',
-                  placeholder: 'Search by Name'
-              %>
-            </div>
-            <div class='form-group col-md-3'>
-              <%= f.submit t('basic.forms.submit_search'), class: 'btn btn-primary mb-2' %>
-              <!-- data-disable-with='<%= t('basic.forms.searching') %>'> -->
-            </div>
-          </div>
-        <% end %>
+      <div class="card-footer">
+        <button class="btn btn-sm btn-primary" type="submit" data-disable-with="<%= t('basic.forms.searching') %>"><%= t('basic.forms.submit_search') %></button>
       </div>
     </div>
+    <% end %>
   </div>
 </div>
-<div class='row'>
-  <div class='col-md-12'>
+<div class="row">
+  <div class="col-md-12">
     <% if !@users.blank? && @users.length > 0 -%>
-    <table class='table table-responsive-sm table-striped'>
+    <table class="table table-responsive-sm table-striped">
       <thead>
         <tr>
-          <th><%= sort_link @search, :id, '#' %></th>
-          <th><%= sort_link @search, :full_name %></th>
-          <th><%= sort_link @search, :access_profile_name, t('models.user.access_profile') %></th>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>Perfil de Acceso</th>
+          <th>Estado</th>
         </tr>
       </thead>
       <tbody>
-        <% @users.each do |user| -%>
+        <% for user in @users -%>
         <tr>
           <td><%= user.id %></td>
-          <td><%= edit_link_to :users, user.full_name, edit_user_path(user) %></td>
-          <td><%= edit_link_to(:access_profiles, user.access_profile_name, edit_access_profile_path(user.access_profile)) unless user.access_profile.blank? %></td>
+          <td><%= link_to user.full_name, edit_cms_user_path(user) %></td>
+          <td><%= link_to(user.access_profile.name, edit_cms_access_profile_path(user.access_profile)) unless user.access_profile.blank? %></td>
+          <td><%= cms_object_status_label(user) %></td>
         </tr>
         <% end -%>
       </tbody>
     </table>
-    <div class='d-flex justify-content-center'>
-      <%= paginate(@users) %>
+    <div class="d-flex justify-content-center">
+      <%= will_paginate_cms(@users) %>
     </div>
     <% else -%>
-    <div class='alert alert-info' role='alert'>No users found.</div>
+    <div class="alert alert-info" role="alert">No se han encontrado Usuarios.</div>
     <% end -%>
   </div>
 </div>

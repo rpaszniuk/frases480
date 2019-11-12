@@ -15,8 +15,8 @@ class CMS::AccessProfilesController < ApplicationController
   def create
     @access_profile = AccessProfile.new(access_profile_params)
     if @access_profile.save
-      flash[:success] = 'The new Access Profile was created.'
-      redirect_to edit_access_profile_path(@access_profile)
+      flash[:success] = 'El nuevo Perfil de Acceso ha sido creado'
+      redirect_to edit_cms_access_profile_path(@access_profile)
     else
       flash[:error] = error_summary_message(@access_profile)
       render :new
@@ -30,8 +30,8 @@ class CMS::AccessProfilesController < ApplicationController
   def update
     @access_profile = AccessProfile.active.find(params[:id])
     if @access_profile.update_attributes(access_profile_params)
-      flash[:success] = 'The Access Profile was updated.'
-      redirect_to edit_access_profile_path(@access_profile)
+      flash[:success] = 'El Perfil de Acceso ha sido actualizado.'
+      redirect_to edit_cms_access_profile_path(@access_profile)
     else
       flash[:error] = error_summary_message(@access_profile)
       render :edit
@@ -43,20 +43,20 @@ class CMS::AccessProfilesController < ApplicationController
     if access_profile.deleted?
       if access_profile.can_be_destroyed?
         if access_profile.destroy
-          flash[:success] = 'The new Access Profile was created.'
-          redirect_to :access_profiles
+          flash[:success] = 'El Perfil de Acceso ha sido destruido.'
+          redirect_to :cms_access_profiles
         else
-          flash[:error] = "We couldn't delete the record, please contact 10 Grounds."
-          redirect_to edit_access_profile_path(access_profile)
+          flash[:error] = 'No pudimos destruir el registro, contactar con 10 Rodrigo Paszniuk.'
+          redirect_to edit_cms_access_profile_path(access_profile)
         end
       else
-        flash[:error] = "The record can't be destroyed, there are other records that depend on it."
-        redirect_to edit_access_profile_path(access_profile)
+        flash[:error] = 'No pudimos destruir el registro por que posee otros registros dependientes.'
+        redirect_to edit_cms_access_profile_path(access_profile)
       end
     else
       access_profile.mark_as_deleted?
-      flash[:success] = 'The Access Profile was marked as deleted.'
-      redirect_to edit_access_profile_path(access_profile)
+      flash[:success] = 'El Perfil de Acceso ha sido marcado como borrado.'
+      redirect_to edit_cms_access_profile_path(access_profile)
     end
   end
 
@@ -66,7 +66,9 @@ class CMS::AccessProfilesController < ApplicationController
     params.require(:access_profile).permit(:name, :status, permissions:
       [
         users: [:full_access],
-        access_profiles: [:full_access]
+        access_profiles: [:full_access],
+        phrases: [:full_access],
+        categories: [:full_access]
       ])
   end
 
@@ -76,15 +78,15 @@ class CMS::AccessProfilesController < ApplicationController
       when 'index'
         @breadcrumbs << { label: t('breadcrumbs.access_profiles.main') }
       when 'new', 'create'
-        @breadcrumbs << { label: t('breadcrumbs.access_profiles.main'), url: access_profiles_path }
+        @breadcrumbs << { label: t('breadcrumbs.access_profiles.main'), url: cms_access_profiles_path }
         @breadcrumbs << { label: t('breadcrumbs.access_profiles.new') }
       when 'edit', 'update'
-        @breadcrumbs << { label: t('breadcrumbs.access_profiles.main'), url: access_profiles_path }
+        @breadcrumbs << { label: t('breadcrumbs.access_profiles.main'), url: cms_access_profiles_path }
         @breadcrumbs << { label: t('breadcrumbs.access_profiles.edit') }
       end
     else
       flash[:error] = t('alerts.cms.access_denied')
-      redirect_to :dashboard
+      redirect_to :cms_dashboard
     end
   end
 end

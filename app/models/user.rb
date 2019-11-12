@@ -35,6 +35,15 @@ class User < ActiveRecord::Base
     "#{self.first_name} #{self.last_name}"
   end
 
+  def self.statuses_map
+    statuses.map { |v, _k| [I18n.t("models.user.status.#{v}"), v] }
+  end
+
+  def mark_as_deleted?
+    self.status = :deleted
+    save(validate: false)
+  end
+
   protected
 
   def generate_auth_token_and_password

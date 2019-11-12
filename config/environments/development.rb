@@ -50,11 +50,10 @@ Rails.application.configure do
   # number of complex assets.
   # config.assets.debug = true
 
-  # Suppress logger output for asset requests.
-  # config.assets.quiet = true
+  config.assets.debug = true
 
-  # Do not fallback to assets pipeline if a precompiled asset is missed.
-  config.assets.compile = false
+  # Suppress logger output for asset requests.
+  config.assets.quiet = true
 
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true

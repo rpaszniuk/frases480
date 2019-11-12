@@ -1,0 +1,11 @@
+//= require jquery3
+//= require rails-ujs
+//= require jquery-ui/core
+//= require jquery-ui/widgets/mouse
+//= require jquery-ui/widgets/sortable
+//= require popper
+//= require bootstrap
+//= require fontawesome-all
+//= require icheck
+//= require cms/base
+//= require_tree ./

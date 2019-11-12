@@ -25,6 +25,19 @@ class Phrase < ApplicationRecord
     ActiveSupport::Inflector.transliterate(self.phrase).gsub(/[^a-zA-Z0-9 ]/, '').split(' ').first(10).join(' ')
   end
 
+  def self.statuses_map
+    statuses.map { |v, _k| [I18n.t("models.phrase.status.#{v}"), v] }
+  end
+
+  def mark_as_deleted?
+    self.status = :deleted
+    save(validate: false)
+  end
+
+  def can_be_destroyed?
+    user.is_super_user?
+  end
+
   protected
 
   def set_slug_if_empty

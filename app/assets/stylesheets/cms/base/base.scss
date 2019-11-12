@@ -31,7 +31,7 @@ html, body {
 .app-header {
   &.navbar {
     .navbar-brand {
-      // @include retina('cms/ss_logo.png', 3, 50%, top left no-repeat);
+      @include retina('cms/logo.png', 1, 70%, top left no-repeat);
     }
     .dropdown-menu {
       padding-top: 0;

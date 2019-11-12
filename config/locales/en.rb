@@ -315,6 +315,12 @@
           active: 'Active',
           deleted: 'Deleted'
         }
+      },
+      phrase: {
+        status: {
+          active: 'Active',
+          deleted: 'Deleted'
+        }
       }
     },
 

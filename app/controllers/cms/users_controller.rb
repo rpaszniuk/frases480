@@ -15,8 +15,8 @@ class CMS::UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = 'The new User was created.'
-      redirect_to edit_user_path(@user)
+      flash[:success] = 'El nuevo Usuario ha sido creado.'
+      redirect_to edit_cms_user_path(@user)
     else
       flash[:error] = error_summary_message(@user)
       render :new
@@ -30,8 +30,8 @@ class CMS::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = 'The User was updated.'
-      redirect_to edit_user_path(@user)
+      flash[:success] = 'El Usuario ha sido actualizado.'
+      redirect_to edit_cms_user_path(@user)
     else
       flash[:error] = error_summary_message(@user)
       render :edit
@@ -43,27 +43,27 @@ class CMS::UsersController < ApplicationController
     if user.deleted?
       if user.can_be_destroyed?
         if user.destroy
-          flash[:success] = 'The User was destroyed.'
-          redirect_to :users
+          flash[:success] = 'El Usuario ha sido destruido.'
+          redirect_to :cms_users
         else
-          flash[:error] = "We couldn't delete the record, please contact 10 Grounds."
-          redirect_to edit_user_path(user)
+          flash[:error] = 'No pudimos destruir el registro, contactar con Rodrigo Paszniuk.'
+          redirect_to edit_cms_user_path(user)
         end
       else
-        flash[:error] = "The record can't be destroyed, there are other records that depend on it."
-        redirect_to edit_user_path(user)
+        flash[:error] = 'No pudimos destruir el registro por que posee otros registros dependientes.'
+        redirect_to edit_cms_user_path(user)
       end
     else
       user.mark_as_deleted?
-      flash[:success] = 'The User was marked as deleted.'
-      redirect_to edit_user_path(user)
+      flash[:success] = 'El Usuario ha sido marcado como borrado.'
+      redirect_to edit_cms_user_path(user)
     end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :access_profile_id, :status)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :access_profile_id, :avatar, :status, :broker_id, :storm_id)
   end
 
   def permissions_and_breadcrumbs
@@ -72,15 +72,15 @@ class CMS::UsersController < ApplicationController
       when 'index'
         @breadcrumbs << { label: t('breadcrumbs.users.main') }
       when 'new', 'create'
-        @breadcrumbs << { label: t('breadcrumbs.users.main'), url: users_path }
+        @breadcrumbs << { label: t('breadcrumbs.users.main'), url: cms_users_path }
         @breadcrumbs << { label: t('breadcrumbs.users.new') }
       when 'edit', 'update'
-        @breadcrumbs << { label: t('breadcrumbs.users.main'), url: users_path }
+        @breadcrumbs << { label: t('breadcrumbs.users.main'), url: cms_users_path }
         @breadcrumbs << { label: t('breadcrumbs.users.edit') }
       end
     else
       flash[:error] = t('alerts.cms.access_denied')
-      redirect_to :dashboard
+      redirect_to :cms_dashboard
     end
   end
 end

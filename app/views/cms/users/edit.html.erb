@@ -1,13 +1,13 @@
 <div class="row">
   <div class="col-md-12">
-    <h1 class="page-title">Edit User</h1>
+    <h1 class="page-title">Editar Usuario</h1>
   </div>
 </div>
 <div class="row">
   <div class="col-md-8">
     <div class="card">
-      <%= form_for @user, url: user_path(@user) do |form| %>
-      <div class="card-header">User Information</div>
+      <%= form_for @user, url: cms_user_path(@user) do |form| %>
+      <div class="card-header">Datos del Usuario</div>
       <div class="card-body">
         <div class="row">
           <div class="col-md-12">
@@ -20,7 +20,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="form-group">
-              <label class="control-label">First Name</label>
+              <label class="control-label">Nombre</label>
               <%= form.text_field :first_name, class: 'form-control' %>
             </div>
           </div>
@@ -28,7 +28,7 @@
         <div class="row">
           <div class="col-md-12">
             <div class="form-group">
-              <label class="control-label">Last Name</label>
+              <label class="control-label">Apellido</label>
               <%= form.text_field :last_name, class: 'form-control' %>
             </div>
           </div>
@@ -44,51 +44,69 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label class="control-label">Access Profile</label>
-              <%= form.select :access_profile_id, options_for_select(AccessProfile.dropdown_menu_options, selected: @user.access_profile_id, disabled: AccessProfile.deleted.collect(&:id)), { include_blank: true }, class: 'form-control' %>
+              <label class="control-label">Avatar</label>
+              <%= form.file_field :avatar, class: 'form-control' %>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <label class="control-label">Status</label>
+              <label class="control-label">Estado</label>
               <%= form.select :status, options_for_select(User.statuses_map, selected: @user.status, disabled: ['deleted']), {}, class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="control-label">Perfil de Acceso</label>
+              <%= form.select :access_profile_id, options_for_select(AccessProfile.all.collect { |ap| [ap.name, ap.id] }, selected: @user.access_profile_id, disabled: AccessProfile.deleted.collect(&:id)), { include_blank: true }, class: 'form-control' %>
             </div>
           </div>
         </div>
       </div>
       <div class="card-footer d-flex justify-content-between">
         <button class="btn btn-primary" type="submit" data-disable-with="<%= t('basic.forms.updating') %>"><%= t('basic.forms.submit_update') %></button>
-        <%= link_to delete_action_label(@user), user_path(@user), method: :delete, data: { disable_with: t('basic.forms.deleting'), confirm: t('basic.forms.confirm') }, class: 'btn btn-danger' %>
+        <%= link_to cms_delete_action_label(@user), cms_user_path(@user), method: :delete, data: { disable_with: t('basic.forms.deleting'), confirm: t('basic.forms.confirm') }, class: 'btn btn-danger', disabled: @user.is_super_user? %>
       </div>
       <% end %>
     </div>
   </div>
   <div class="col-md-4">
     <div class="card">
-      <div class="card-header">Status</div>
+      <div class="card-header">Avatar y Estado</div>
       <div class="card-body text-center">
-        <h1 class="mt-3"><%= object_status_label(@user) %></h1>
+        <%= show_avatar(@user) %>
+        <h1 class="mt-3"><%= cms_object_status_label(@user) %></h1>
       </div>
     </div>
+    <% if @current_user.is_super_user? -%>
+    <label class="control-label">Auth Token</label>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text"><span class="fas fa-key"></span></span>
+      </div>
+      <input type="text" class="form-control" value="<%= @user.auth_token %>">
+    </div>
+    <% end -%>
   </div>
 </div>
 <div class="row">
   <div class="col-md-8">
     <div class="card">
-      <%= form_for @user, url: user_path(@user) do |form| %>
-      <div class="card-header">Password</div>
+      <%= form_for @user, url: cms_user_path(@user) do |form| %>
+      <div class="card-header">Contraseña</div>
       <div class="card-body">
         <div class="row">
           <div class="col-md-12">
             <div class="form-group">
-              <label class="control-label">New Password</label>
+              <label class="control-label">Nueva Contraseña</label>
               <%= form.text_field :password, class: 'form-control', value: '' %>
             </div>
           </div>
         </div>
-        <button class="btn btn-primary" type="submit" data-disable-with="<%= t('basic.forms.updating') %>">Update Password</button>
+        <button class="btn btn-primary" type="submit" data-disable-with="<%= t('basic.forms.updating') %>">Cambiar Contraseña</button>
       </div>
       <% end %>
     </div>

@@ -21,175 +21,158 @@
     },
 
     date: {
-      abbr_day_names: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-      abbr_month_names: [nil, 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      day_names: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      abbr_day_names: %w[Dom Lun Mar Mie Jue Vie Sab],
+      abbr_month_names: [nil, 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+      day_names: %w[Domingo Lunes Martes Miércoles Jueves Viernes Sábado],
       formats: {
         default: '%Y-%m-%d',
-        long: ->(date, _) { "%B #{date.day.ordinalize}, %Y" },
+        long: '%B %d, %Y',
         short: '%b %d',
+        short_chart: '%d %b',
         complete: '%a, %d %B %Y',
-        month_day_ord: ->(date, _) { "%b #{date.day.ordinalize}" },
-        full_month_day_ord: ->(date, _) { "%B #{date.day.ordinalize}" },
+        complete_abbr: '%a, %d/%b/%Y',
+        shorty: '%d/%b/%y',
+        datepicker: '%d-%m-%Y'
       },
-      month_names: [nil, 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-      order: [:year, :month, :day]
-    },
-
-    time: {
-      am: 'am',
-      formats: {
-        default: '%a, %d %b %Y %I:%M:%S %z',
-        long: '%B %d, %Y %I:%M %p',
-        short: '%d %b %I:%M %p',
-        complete: '%a, %d %B %Y %I:%M %p',
-        complete_with_tz: '%a, %d %B %Y %I:%M %p %Z',
-        datetimepicker: '%Y-%m-%d %I:%M %p',
-        compact: '%B, %d %Y',
-        month_day_ord: ->(date, _) { "%b #{date.day.ordinalize}" },
-        month_day_year_ord: ->(date, _) { "%b #{date.day.ordinalize}, %Y" },
-        full_month_day_ord: ->(date, _) { "%B #{date.day.ordinalize}" },
-        time_only: '%I:%M %p',
-        time_long: '%I:%M:%S'
-      },
-      pm: 'pm'
+      month_names: [nil, 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+      order: [:day, :month, :year]
     },
 
     datetime: {
       distance_in_words: {
         about_x_hours: {
-          one: 'about 1 hour',
-          other: 'about %{count} hours'
+          one: 'Hace 1 hora',
+          other: 'Hace %{count} horas'
         },
         about_x_months: {
-          one: 'about 1 month',
-          other: 'about %{count} months'
+          one: 'Hace 1 mes',
+          other: 'Hace %{count} meses'
         },
         about_x_years: {
-          one: 'about 1 year',
-          other: 'about %{count} years'
+          one: 'Hace 1 año',
+          other: 'about %{count} años'
         },
         almost_x_years: {
-          one: 'almost 1 year',
-          other: 'almost %{count} years'
+          one: 'Casi 1 año',
+          other: 'Casi %{count} años'
         },
-        half_a_minute: 'half a minute',
+        half_a_minutes: 'half a minuto',
         less_than_x_minutes: {
-          one: 'less than a minute',
-          other: 'less than %{count} minutes'
+          one: 'Menos de un minuto',
+          other: 'Menos de %{count} minutos'
         },
         less_than_x_seconds: {
-          one: 'less than 1 second',
-          other: 'less than %{count} seconds'
+          one: 'Menos de 1 segundo',
+          other: 'Menos de %{count} segundos'
         },
         over_x_years: {
-          one: 'over 1 year',
-          other: 'over %{count} years'
+          one: 'Más de 1 año',
+          other: 'Más de %{count} años'
         },
         x_days: {
-          one: '1 day',
-          other: '%{count} days'
+          one: '1 día',
+          other: '%{count} días'
         },
         x_minutes: {
-          one: '1 minute',
-          other: '%{count} minutes'
+          one: '1 minuto',
+          other: '%{count} minutos'
         },
         x_months: {
-          one: '1 month',
-          other: '%{count} months'
+          one: '1 mes',
+          other: '%{count} meses'
         },
         x_seconds: {
-          one: '1 second',
-          other: '%{count} seconds'
+          one: '1 segundo',
+          other: '%{count} segundos'
         }
       },
       prompts: {
-        day: 'Day',
-        hour: 'Hour',
-        minute: 'Minute',
-        month: 'Month',
-        second: 'Seconds',
-        year: 'Year'
+        día: 'Día',
+        hora: 'Hora',
+        minuto: 'Minuto',
+        mes: 'Mes',
+        segundo: 'Segundo',
+        año: 'Año'
       }
     },
 
     errors: {
       format: '%{attribute} %{message}',
       messages: {
-        accepted: 'must be accepted',
-        blank: 'cannot be blank',
-        present: 'must be blank',
-        confirmation: "doesn't match %{attribute}",
-        empty: 'cannot be empty',
-        equal_to: 'must be equal to %{count}',
-        even: 'must be even',
-        exclusion: 'is reserved',
-        greater_than: 'must be greater than %{count}',
-        greater_than_or_equal_to: 'must be greater than or equal to %{count}',
-        inclusion: 'is not included in the list',
-        invalid: 'is invalid',
-        less_than: 'must be less than %{count}',
-        less_than_or_equal_to: 'must be less than or equal to %{count}',
-        not_a_number: 'is not a number',
-        not_an_integer: 'must be an integer',
-        odd: 'must be odd',
-        record_invalid: 'Validation failed: %{errors}',
+        accepted: 'Debe ser aceptable',
+        blank: 'No puede estar en blanco',
+        present: 'Debe estar en blanco',
+        confirmation: 'No es igual a %{attribute}',
+        empty: 'No puede estar vacío',
+        equal_to: 'Debe ser igual a %{count}',
+        even: 'Debe ser par',
+        exclusion: 'Está reservado',
+        greater_than: 'Debe ser mayor a %{count}',
+        greater_than_or_equal_to: 'Debe ser mayor o igual a %{count}',
+        inclusion: 'No esta incluído en la lista',
+        invalid: 'Es inválido',
+        less_than: 'Debe ser menor a %{count}',
+        less_than_or_equal_to: 'Debe ser menor o igual a %{count}',
+        not_a_number: 'No es un número',
+        not_an_integer: 'Debe ser un número entero',
+        odd: 'Debe ser impar',
+        record_invalid: 'La validación ha fallado: %{errors}',
         restrict_dependent_destroy: {
-          one: 'Cannot delete record because a dependent %{record} exists',
-          many: 'Cannot delete record because dependent %{record} exist'
+          one: 'No puede eliminar el registro por que posee otros registros dependiente: %{record}',
+          many: 'No puede eliminar el registro por que posee otros registros dependiente %{record}'
         },
-        taken: 'has already been taken',
+        taken: 'Ya ha sido tomado',
         too_long: {
-          one: 'is too long (maximum is 1 character)',
-          other: 'is too long (maximum is %{count} characters)'
+          one: 'Es muy largo (máximo 1 carácter)',
+          other: 'Es muy largo (máximo %{count} caracteres)'
         },
         too_short: {
-          one: 'is too short (minimum is 1 character)',
-          other: 'is too short (minimum is %{count} characters)'
+          one: 'Es muy corto (mínimo 1 carácter)',
+          other: 'Es muy corto (mínimo %{count} caracteres)'
         },
         wrong_length: {
-          one: 'is the wrong length (should be 1 character)',
-          other: 'is the wrong length (should be %{count} characters)'
+          one: 'Es la longitud incorrecta (debe ser de 1 carácter)',
+          other: 'Es la longitud incorrecta (debe ser %{count} caracteres)'
         },
-        other_than: 'must be other than %{count}',
-        must_choose: 'you must choose at least one'
+        other_than: 'Debe ser otro que %{count}',
+        must_choose: 'Debe seleccionar al menos uno'
       },
       template: {
-        body: 'There were problems with the following fields:',
+        body: 'Hubieron problemas con los siguientes campos:',
         header: {
-          one: '1 error prohibited this %{model} from being saved',
-          other: '%{count} errors prohibited this %{model} from being saved'
+          one: '1 error prohibio que el registro (%{model}) pueda ser guardado',
+          other: '%{count} errores prohibieron que el registro (%{model}) pueda ser guardado'
         }
       }
     },
 
     helpers: {
       select: {
-        prompt: 'Please select'
+        prompt: 'Seleccionar'
       },
       submit: {
-        create: 'Create %{model}',
-        submit: 'Save %{model}',
-        update: 'Update %{model}'
+        create: 'Crear %{model}',
+        submit: 'Guardar %{model}',
+        update: 'Acualizar %{model}'
       }
     },
 
     number: {
       currency: {
         format: {
-          delimiter: ',',
+          delimiter: '.',
           format: '%u%n',
-          precision: 2,
-          separator: '.',
+          precision: 0,
+          separator: ', ',
           significant: false,
           strip_insignificant_zeros: false,
-          unit: '$'
+          unit: 'Gs. '
         }
       },
       format: {
-        delimiter: ',',
-        precision: 2,
-        separator: '.',
+        delimiter: '.',
+        precision: 3,
+        separator: ', ',
         significant: false,
         strip_insignificant_zeros: false
       },
@@ -197,17 +180,17 @@
         decimal_units: {
           format: '%n %u',
           units: {
-            billion: 'Billion',
-            million: 'Million',
-            quadrillion: 'Quadrillion',
-            thousand: 'Thousand',
-            trillion: 'Trillion',
+            billion: 'Billones',
+            million: 'Millón',
+            quadrillion: 'Cuatrillón',
+            thousand: 'Mil',
+            trillion: 'Trillón',
             unit: ''
           }
         },
         format: {
-          delimiter: ',',
-          precision: 2,
+          delimiter: '',
+          precision: 3,
           significant: true,
           strip_insignificant_zeros: true
         },
@@ -233,29 +216,41 @@
       },
       precision: {
         format: {
-          precision: 2,
-          delimiter: ','
+          delimiter: ''
         }
       }
     },
 
     support: {
       array: {
-        last_word_connector: ', and ',
-        two_words_connector: ' and ',
+        last_word_connector: ', y ',
+        two_words_connector: ' y ',
         words_connector: ', '
       }
+    },
+
+    time: {
+      am: 'am',
+      formats: {
+        default: '%a, %d %b %Y %H:%M:%S %z',
+        long: '%B %d, %Y %H:%M',
+        short: '%d %b %H:%M',
+        complete: '%a, %d %B %Y %H:%M',
+        datetimepicker: '%Y-%m-%d %H:%M',
+        compact: '%B, %d %Y'
+      },
+      pm: 'pm'
     },
 
     activemodel: {
       errors: {
         models: {
-          user_auth: {
+          cms_user_auth: {
             attributes: {
               email: {
-                no_user_found: 'We couldn\'t find any user with that email',
-                no_access_profile_associated: 'The user doesn\'t have any associated Profile',
-                inactive: 'The user is not active.'
+                no_user_found: 'No pudimos encontrar un usuario con ese email',
+                no_access_profile_associated: 'El usuario no tiene un perfil de acceso asaciado',
+                inactive: 'El usuario no esta activo.'
               }
             }
           }
@@ -263,49 +258,61 @@
       }
     },
 
-    will_paginate: {
-      previous_label: '&larr;',
-      next_label: '&rarr;',
-      page_gap: ' ... '
-    },
-
     basic: {
       forms: {
-        submit_create: 'Create',
-        submit_update: 'Update',
-        submit_delete: 'Delete',
-        submit_upload: 'Upload',
-        submit_search: 'Search',
-        submit_register: 'Register',
-        submit_find: 'Find',
-        submit_import: 'Import',
-        submit_add: 'Add',
-        submit_save: 'Save Changes',
-        submit: 'Submit',
-        confirm: 'Are you sure?',
-        loading: 'Loading ...',
-        deleting: 'Deleting ...',
-        updating: 'Updating ...',
-        saving: 'Saving ...',
-        searching: 'Searching ...',
-        generating: 'Generating ...',
-        creating: 'Creating',
-        adding: 'Adding',
-        uploading: 'Uploading',
-        importing: 'Importing'
+        submit_create: 'Crear',
+        submit_update: 'Actualizar',
+        submit_delete: 'Eliminar',
+        submit_destroy: 'Destruir',
+        submit_upload: 'Subir',
+        submit_search: 'Buscar',
+        submit_save: 'Guardar',
+        submit_add: 'Agregar',
+        submit_reset: 'Resetear',
+        submit_create_and_add_f: 'Crear y agregar otra',
+        confirm: 'Está seguro?',
+        loading: 'Cargando ...',
+        deleting: 'Eliminando ...',
+        updating: 'Actualizando ...',
+        saving: 'Guardando ...',
+        searching: 'Buscando ...',
+        creating: 'Creando ...',
+        adding: 'Agregando ...',
+        uploading: 'Subiendo ...',
+        sending: 'Enviando ...'
       },
-      yes: 'yes',
-      no: 'no',
-      his: 'his',
-      her: 'her',
-      he: 'he',
-      she: 'she'
+      yes: 'si',
+      no: 'no'
+    },
+
+    alerts: {
+      cms: {
+        logout: 'Hasta la próxima! 👋',
+        access_denied: 'Acceso Denegado 🛑'
+      }
+    },
+
+    breadcrumbs: {
+      root: 'Escritorio',
+      access_profiles: { main: 'Perfiles de Acceso', new: 'Nuevo', edit: 'Editar' },
+      users: { main: 'Usuarios', new: 'Nuevo', edit: 'Editar' },
+      categories: { main: 'Categorías', new: 'Nuevo', edit: 'Editar' },
+      phrases: { main: 'Frases', new: 'Nuevo', edit: 'Editar' }
     },
 
     models: {
-      user: {
+      phrase: {
         status: {
           active: 'Activo',
+          pending: 'Pendiente',
+          rejected: 'Rechazado',
+          deleted: 'Eliminado'
+        }
+      },
+      category: {
+        status: {
+          active: 'Activo',
+          inactive: 'Inactivo',
           blocked: 'Bloqueado',
           deleted: 'Eliminado'
         }
@@ -313,20 +320,17 @@
       access_profile: {
         status: {
           active: 'Activo',
+          blocked: 'Bloqueado',
+          deleted: 'Eliminado'
+        }
+      },
+      user: {
+        status: {
+          active: 'Activo',
+          blocked: 'Bloqueado',
           deleted: 'Eliminado'
         }
       }
-    },
-
-    alerts: {
-      logout: 'Have a good day 👋',
-      not_logged_in: 'You have to login first.'
-    },
-
-    breadcrumbs: {
-      root: 'Dashboard',
-      access_profiles: { main: 'Perfiles de Acceso', new: 'Nuevo', edit: 'Editar' },
-      users: { main: 'Usuarios', new: 'Nuevo', edit: 'Editar' }
     }
   }
 }

@@ -21,4 +21,8 @@ module CMSAccessControl
   def configure_time_zone(&block)
     Time.use_zone(@current_user.time_zone.blank? ? 'UTC' : @current_user.time_zone, &block)
   end
+
+  def error_summary_message(object)
+    "Encontramos: #{object.errors.count} #{'error'.pluralize(object.errors.count)}"
+  end
 end

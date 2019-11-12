@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="page-title">Editar Frase</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <%= form_for @phrase, url: cms_phrase_path(@phrase) do |form| %>
+      <div class="card-header">Frase</div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="control-label">ID</label>
+              <p class="form-control-static"><%= @phrase.id %></p>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="control-label">Slug</label>
+              <p class="form-control-static"><%= @phrase.slug %></p>
+            </div>
+          </div>
+        </div>        
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="control-label">Frase</label>
+              <%= form.text_area :phrase, class: 'form-control', rows: 8 %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="control-label">Categoría</label>
+              <%= form.select :category_id, options_for_select(Category.all.collect { |ap| [ap.name, ap.id] }, selected: @phrase.category_id, disabled: Category.deleted.collect(&:id)), { include_blank: true }, class: 'form-control' %>
+            </div>
+          </div>
+        </div>        
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="control-label">Estado</label>
+              <%= form.select :status, options_for_select(Phrase.statuses_map, selected: @phrase.status, disabled: ['deleted']), {}, class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer d-flex justify-content-between">
+        <button class="btn btn-primary" type="submit" data-disable-with="<%= t('basic.forms.updating') %>"><%= t('basic.forms.submit_update') %></button>
+        <%= link_to cms_delete_action_label(@phrase), cms_phrase_path(@phrase), method: :delete, data: { disable_with: t('basic.forms.deleting'), confirm: t('basic.forms.confirm') }, class: 'btn btn-danger', disabled: @current_user.is_super_user? %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">Estado</div>
+      <div class="card-body text-center">
+        <h1 class="mt-3"><%= cms_object_status_label(@phrase) %></h1>
+      </div>
+    </div>
+  </div>
+</div>

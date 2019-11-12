@@ -15,6 +15,19 @@ class Category < ApplicationRecord
     name
   end
 
+  def self.statuses_map
+    statuses.map { |v, _k| [I18n.t("models.category.status.#{v}"), v] }
+  end
+
+  def mark_as_deleted?
+    self.status = :deleted
+    save(validate: false)
+  end
+
+  def can_be_destroyed?
+    !phrases.exists?
+  end
+
   protected
 
   def set_slug_if_empty

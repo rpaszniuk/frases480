@@ -1,6 +1,6 @@
 access_profile = AccessProfile.new
 access_profile.name = 'Administrator'
-access_profile.permissions = { 'access_profiles' => { 'manage' => '1' }, 'users' => { 'manage' => '1' } }
+access_profile.permissions = { 'access_profiles' => { 'full_access' => '1' }, 'users' => { 'full_access' => '1' } }
 access_profile.is_super_profile = true
 access_profile.save
 
