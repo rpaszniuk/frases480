@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   belongs_to :access_profile
   has_one :secure_user, dependent: :destroy
-  has_one :secure_user
   has_many :phrases
 
   accepts_nested_attributes_for :secure_user, allow_destroy: true
