@@ -5,7 +5,7 @@ class CMS::UsersController < ApplicationController
   def index
     @users = User.active.includes(:access_profile)
     @users = @users.where('email LIKE :k OR first_name LIKE :k OR last_name LIKE :k', k: "%#{params[:k]}%") unless params[:k].blank?
-    @users = @users.paginate(page: params[:page])
+    @users = @users.order(id: :desc).paginate(page: params[:page])
   end
 
   def new

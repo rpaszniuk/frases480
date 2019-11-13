@@ -5,7 +5,7 @@ class CMS::PhrasesController < ApplicationController
   def index
     @phrases = Phrase.all
     @phrases = @phrases.where('phrase LIKE :k', k: "%#{params[:k]}%") unless params[:k].blank?
-    @phrases = @phrases.paginate(page: params[:page])
+    @phrases = @phrases.order(id: :desc).paginate(page: params[:page])
   end
 
   def new

@@ -5,7 +5,7 @@ class CMS::CategoriesController < ApplicationController
   def index
     @categories = Category.all
     @categories = @categories.where('name LIKE :k', k: "%#{params[:k]}%") unless params[:k].blank?
-    @categories = @categories.paginate(page: params[:page])
+    @categories = @categories.order(id: :desc).paginate(page: params[:page])
   end
 
   def new
