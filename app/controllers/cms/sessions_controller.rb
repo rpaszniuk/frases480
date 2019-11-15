@@ -19,6 +19,10 @@ class CMS::SessionsController < ApplicationController
   end
 
   def sign_up
+    unless session[:sess_user].nil?
+      redirect_to :cms_dashboard
+      return
+    end
     @user = User.new
     return if request.get?
 
@@ -36,6 +40,10 @@ class CMS::SessionsController < ApplicationController
   end
 
   def forgot_password
+    unless session[:sess_user].nil?
+      redirect_to :cms_dashboard
+      return
+    end
     @user_auth = UserAuth.new
     return if request.get?
 
