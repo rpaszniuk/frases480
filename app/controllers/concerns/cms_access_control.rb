@@ -11,7 +11,7 @@ module CMSAccessControl
   def session_and_stuff
     @current_user = User.includes(:access_profile).find_by(id: session[:sess_user], status: User.statuses[:active]) if session[:sess_user]
     if @current_user.nil?
-      flash[:alert] = t('cms.alerts.not_logged_in')
+      flash[:alert] = t('alerts.cms.not_logged_in')
       redirect_to :cms_root
     else
       @breadcrumbs = []

@@ -5,6 +5,10 @@ Rails.application.routes.draw do
     namespace :sessions, path: '' do
       post 'login'
       get 'logout'
+      get 'forgot_password'
+      get 'sign_up'
+      post 'forgot_password'
+      post 'sign_up'
     end
 
     namespace :dashboard do
@@ -18,6 +22,10 @@ Rails.application.routes.draw do
 
     namespace :me do
       get '', action: :show, as: :show
+    end
+
+    namespace :login do
+      get '', action: :index, as: :index
     end
 
     get '/', action: :index, controller: :login, as: :root

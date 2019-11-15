@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row justify-content-center align-items-center h-100 login-screen">
+    <div class="col-md-5">
+      <div class="card-group">
+        <div class="card p-4">
+          <div class="card-body">
+            <h1 class="text-center"><%= image_tag('cms/logo.png') %></h1>
+            <p class="text-center">Por Favor completa el formulario</p>
+            <%= cms_render_flash_messages %>
+            <%= form_for @user, url: :cms_sessions_sign_up do |form| %>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+              </div>
+              <%= text_field_tag 'user[first_name]', @user.first_name, class: 'form-control', placeholder: 'Nombre' %>
+              <%= cms_show_errors_for(@user, :first_name) %>
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+              </div>
+              <%= text_field_tag 'user[last_name]', @user.last_name, class: 'form-control', placeholder: 'Apellido' %>
+              <%= cms_show_errors_for(@user, :last_name) %>
+            </div>                        
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+              </div>
+              <%= text_field_tag 'user[email]', @user.email, class: 'form-control', placeholder: 'E-mail' %>
+              <%= cms_show_errors_for(@user, :email) %>
+            </div>
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+              </div>
+              <%= password_field_tag 'user[password]', '', class: 'form-control', placeholder: 'Contraseña' %>
+              <%= cms_show_errors_for(@user, :password) %>
+            </div>
+            <div class="row">
+              <div class="col-12 text-center">
+                <%= recaptcha_tags %><br />
+              </div>
+            </div>  
+            <div class="row">
+              <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary px-4">Registrarse</button>
+              </div>
+            </div>
+            <% end -%>
+          </div>
+          <div class="card-footer">
+            <div class="text-center">
+              ¿Ya tienes una cuenta? <a href="/">Iniciar Sesión</a>
+            </div>
+            <div class="text-center">
+              <a href="/forgot_password">¿Olvidaste tu contraseña?</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -63,7 +63,7 @@ class CMS::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :access_profile_id, :avatar, :status, :broker_id, :storm_id)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :access_profile_id, :avatar, :status)
   end
 
   def permissions_and_breadcrumbs

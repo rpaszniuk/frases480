@@ -26,6 +26,18 @@
             <li class="nav-item">
               <a class="nav-link" href="/acerca">Acerca de</a>
             </li>
+            <% if @current_user -%>
+              <li class="nav-item">
+                <a class="nav-link" href="https://cms.frases480.com/login">Panel de Administración</a>
+              </li>
+            <% else -%>
+              <li class="nav-item">
+                <a class="nav-link" href="https://cms.frases480.com/login">Iniciar sesión</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="https://cms.frases480.com/sign_up">Registrarse</a>
+              </li>              
+            <% end -%>       
           </ul>
           <form class="form-inline my-2 my-lg-0" method="get" id="searchform" action="/search/phrases/">
             <input name="q" id="q" class="form-control mr-sm-2" type="text" placeholder="Buscar" aria-label="Buscar" value="<%= params[:q]%>" required>

@@ -288,7 +288,8 @@
     alerts: {
       cms: {
         logout: 'Hasta la próxima! 👋',
-        access_denied: 'Acceso Denegado 🛑'
+        access_denied: 'Acceso Denegado 🛑',
+        not_logged_in: 'Tienes que iniciar sesión primero'
       }
     },
 

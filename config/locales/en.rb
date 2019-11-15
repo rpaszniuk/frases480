@@ -326,6 +326,7 @@
 
     alerts: {
       logout: 'Have a good day 👋',
+      access_denied: 'Access Denied 🛑',
       not_logged_in: 'You have to login first.'
     },
 
