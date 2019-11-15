@@ -91,8 +91,6 @@ module CMS::MainHelper
   end
 
   def cms_object_status_label(object, options = {})
-    print(object.class.name.underscore)
-    print("asgasgsag")
     case object.status
     when 'draft', 'inactive', 'pending'
       %(<span class="badge badge-info #{options[:class]}">#{t("models.#{object.class.name.underscore}.status.#{object.status}").upcase}</span>).html_safe

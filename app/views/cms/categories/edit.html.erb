@@ -52,7 +52,7 @@
       </div>
       <div class="card-footer d-flex justify-content-between">
         <button class="btn btn-primary" type="submit" data-disable-with="<%= t('basic.forms.updating') %>"><%= t('basic.forms.submit_update') %></button>
-        <%= link_to cms_delete_action_label(@category), cms_category_path(@category), method: :delete, data: { disable_with: t('basic.forms.deleting'), confirm: t('basic.forms.confirm') }, class: 'btn btn-danger', disabled: @current_user.is_super_user? %>
+        <%= link_to cms_delete_action_label(@category), cms_category_path(@category), method: :delete, data: { disable_with: t('basic.forms.deleting'), confirm: t('basic.forms.confirm') }, class: 'btn btn-danger' %>
       </div>
       <% end %>
     </div>

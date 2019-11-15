@@ -29,7 +29,7 @@
           <div class="col-md-12">
             <div class="form-group">
               <label class="control-label">Frase</label>
-              <%= form.text_area :phrase, class: 'form-control', rows: 8 %>
+              <%= form.text_area :phrase, class: 'form-control', rows: 8, disabled: !@phrase.pending? && !@current_user.access_profile.can?(:full_access, :phrases) %>
             </div>
           </div>
         </div>
@@ -37,22 +37,29 @@
           <div class="col-md-12">
             <div class="form-group">
               <label class="control-label">Categoría</label>
-              <%= form.select :category_id, options_for_select(Category.all.collect { |ap| [ap.name, ap.id] }, selected: @phrase.category_id, disabled: Category.deleted.collect(&:id)), { include_blank: true }, class: 'form-control' %>
-            </div>
-          </div>
-        </div>        
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <label class="control-label">Estado</label>
-              <%= form.select :status, options_for_select(Phrase.statuses_map, selected: @phrase.status, disabled: ['deleted']), {}, class: 'form-control' %>
+              <%= form.select :category_id, options_for_select(Category.all.collect { |ap| [ap.name, ap.id] }, selected: @phrase.category_id, disabled: Category.deleted.collect(&:id)), { include_blank: true }, class: 'form-control', disabled: !@phrase.pending? && !@current_user.access_profile.can?(:full_access, :phrases) %>
             </div>
           </div>
         </div>
+        <% if @current_user.access_profile.can?(:full_access, :phrases) -%>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label class="control-label">Estado</label>
+                <%= form.select :status, options_for_select(Phrase.statuses_map, selected: @phrase.status, disabled: ['deleted']), {}, class: 'form-control' %>
+              </div>
+            </div>
+          </div>
+        <% end %>  
       </div>
       <div class="card-footer d-flex justify-content-between">
-        <button class="btn btn-primary" type="submit" data-disable-with="<%= t('basic.forms.updating') %>"><%= t('basic.forms.submit_update') %></button>
-        <%= link_to cms_delete_action_label(@phrase), cms_phrase_path(@phrase), method: :delete, data: { disable_with: t('basic.forms.deleting'), confirm: t('basic.forms.confirm') }, class: 'btn btn-danger', disabled: @current_user.is_super_user? %>
+        <% if !@phrase.pending? && !@current_user.access_profile.can?(:full_access, :phrases) -%>
+          <button class="btn btn-primary" type="submit" disabled data-disable-with="<%= t('basic.forms.updating') %>"><%= t('basic.forms.submit_update') %></button>
+        <% else -%>
+          <button class="btn btn-primary" type="submit" data-disable-with="<%= t('basic.forms.updating') %>"><%= t('basic.forms.submit_update') %></button>
+        <% end -%>
+        
+        <%= link_to cms_delete_action_label(@phrase), cms_phrase_path(@phrase), method: :delete, data: { disable_with: t('basic.forms.deleting'), confirm: t('basic.forms.confirm') }, class: 'btn btn-danger' if @current_user.access_profile.can?(:full_access, :phrases) %>
       </div>
       <% end %>
     </div>

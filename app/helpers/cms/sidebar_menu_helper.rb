@@ -5,18 +5,16 @@ module CMS::SidebarMenuHelper
 
     menu[panel_index] = { label: 'Escritorio', submenu: [], icon: 'home', url: :cms_dashboard, active: cms_active_controller?('dashboard') }
 
+    panel_index += 1
+    menu[panel_index] = { label: 'Frases', submenu: [], icon: 'book', active: cms_active_controller?('phrases/') }
+    menu[panel_index][:submenu] << { label: 'Listar', url: :cms_phrases }
+    menu[panel_index][:submenu] << { label: 'Crear', url: :new_cms_phrase }
+
     if @current_user.access_profile.can?(:full_access, :categories)
       panel_index += 1
       menu[panel_index] = { label: 'Categorías', submenu: [], icon: 'tasks', active: cms_active_controller?('categories') }
       menu[panel_index][:submenu] << { label: 'Listar', url: :cms_categories }
       menu[panel_index][:submenu] << { label: 'Crear', url: :new_cms_category }
-    end
-
-    if @current_user.access_profile.can?(:full_access, :phrases)
-      panel_index += 1
-      menu[panel_index] = { label: 'Frases', submenu: [], icon: 'book', active: cms_active_controller?('phrases') }
-      menu[panel_index][:submenu] << { label: 'Listar', url: :cms_phrases }
-      menu[panel_index][:submenu] << { label: 'Crear', url: :new_cms_phrase }
     end
 
     if @current_user.access_profile.can?(:full_access, :users)

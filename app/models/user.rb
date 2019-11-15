@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  belongs_to :access_profile
+  belongs_to :access_profile, optional: true
   has_one :secure_user, dependent: :destroy
   has_many :phrases
 

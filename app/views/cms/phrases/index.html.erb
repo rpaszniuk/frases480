@@ -32,6 +32,7 @@
         <tr>
           <th>#</th>
           <th>Frase</th>
+          <th>Categoría</th>
           <th>Estado</th>
         </tr>
       </thead>
@@ -40,6 +41,7 @@
         <tr>
           <td><%= phrase.id %></td>
           <td><%= link_to phrase.phrase, edit_cms_phrase_path(phrase) %></td>
+          <td><%= link_to phrase.category.name %></td>
           <td><%= cms_object_status_label(phrase) %></td>
         </tr>
         <% end -%>
@@ -49,7 +51,7 @@
       <%= will_paginate_cms(@phrases) %>
     </div>
     <% else -%>
-    <div class="alert alert-info" role="alert">No se han encontrado Usuarios.</div>
+    <div class="alert alert-info" role="alert">No se han encontrado Frases.</div>
     <% end -%>
   </div>
 </div>

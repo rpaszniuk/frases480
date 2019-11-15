@@ -3,7 +3,8 @@ class CMS::PhrasesController < ApplicationController
   before_action :permissions_and_breadcrumbs
 
   def index
-    @phrases = Phrase.all
+    @phrases = Phrase.includes(:category)
+    @phrases = @phrases.where(user_id: @current_user.id) unless @current_user.access_profile.can?(:full_access, :phrases)
     @phrases = @phrases.where('phrase LIKE :k', k: "%#{params[:k]}%") unless params[:k].blank?
     @phrases = @phrases.order(id: :desc).paginate(page: params[:page])
   end
@@ -15,6 +16,7 @@ class CMS::PhrasesController < ApplicationController
   def create
     @phrase = Phrase.new(phrase_params)
     @phrase.user = @current_user
+    @phrase.status = :pending unless @current_user.access_profile.can?(:full_access, :phrases)
     if @phrase.save
       flash[:success] = 'La nueva frase ha sido creada.'
       redirect_to edit_cms_phrase_path(@phrase)
@@ -25,23 +27,22 @@ class CMS::PhrasesController < ApplicationController
   end
 
   def edit
-    @phrase = Phrase.find(params[:id])
+    @phrase = @current_user.access_profile.can?(:full_access, :phrases) ? Phrase.find(params[:id]) : @current_user.phrases.find(params[:id])
   end
 
   def update
-    @phrase = Phrase.find(params[:id])
+    @phrase = @current_user.access_profile.can?(:full_access, :phrases) ? Phrase.find(params[:id]) : @current_user.phrases.find(params[:id])
     if @phrase.update_attributes(phrase_params)
       flash[:success] = 'La frase ha sido actualizada.'
       redirect_to edit_cms_phrase_path(@phrase)
     else
-      print(@phrase.errors)
       flash[:error] = error_summary_message(@phrase)
       render :edit
     end
   end
 
   def destroy
-    phrase = Phrase.find(params[:id])
+    phrase = @current_user.access_profile.can?(:full_access, :phrases) ? Phrase.find(params[:id]) : @current_user.phrases.find(params[:id])
     if phrase.deleted?
       if phrase.can_be_destroyed?
         if phrase.destroy
@@ -69,20 +70,15 @@ class CMS::PhrasesController < ApplicationController
   end
 
   def permissions_and_breadcrumbs
-    if @current_user.access_profile.can?(:full_access, :phrases)
-      case params[:action]
-      when 'index'
-        @breadcrumbs << { label: t('breadcrumbs.phrases.main') }
-      when 'new', 'create'
-        @breadcrumbs << { label: t('breadcrumbs.phrases.main'), url: cms_phrases_path }
-        @breadcrumbs << { label: t('breadcrumbs.phrases.new') }
-      when 'edit', 'update'
-        @breadcrumbs << { label: t('breadcrumbs.phrases.main'), url: cms_phrases_path }
-        @breadcrumbs << { label: t('breadcrumbs.phrases.edit') }
-      end
-    else
-      flash[:error] = t('alerts.cms.access_denied')
-      redirect_to :cms_dashboard
+    case params[:action]
+    when 'index'
+      @breadcrumbs << { label: t('breadcrumbs.phrases.main') }
+    when 'new', 'create'
+      @breadcrumbs << { label: t('breadcrumbs.phrases.main'), url: cms_phrases_path }
+      @breadcrumbs << { label: t('breadcrumbs.phrases.new') }
+    when 'edit', 'update'
+      @breadcrumbs << { label: t('breadcrumbs.phrases.main'), url: cms_phrases_path }
+      @breadcrumbs << { label: t('breadcrumbs.phrases.edit') }
     end
   end
 end
