@@ -25,19 +25,7 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item">
               <a class="nav-link" href="/acerca">Acerca de</a>
-            </li>
-            <% if @current_user -%>
-              <li class="nav-item">
-                <a class="nav-link" href="https://cms.frases480.com/login">Panel de Administración</a>
-              </li>
-            <% else -%>
-              <li class="nav-item">
-                <a class="nav-link" href="https://cms.frases480.com/login" rel="external">Iniciar sesión</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="https://cms.frases480.com/sign_up" rel="external">Registrarse</a>
-              </li>              
-            <% end -%>       
+            </li>      
           </ul>
           <form class="form-inline my-2 my-lg-0" method="get" id="searchform" action="/search/phrases/">
             <input name="q" id="q" class="form-control mr-sm-2" type="text" placeholder="Buscar" aria-label="Buscar" value="<%= params[:q]%>" required>
@@ -56,6 +44,7 @@
   <footer role="footer" id="footer">
     <div class="card bg-light text-center">
       <div class="card-body">
+        ¿Te gustaría ser colaborador de Frases 480? <a href="https://cms.frases480.com" rel="external">Ir la CMS</a>.<br/>
         Copyright &copy; 2019  <a href="mailto:info@frases480.com">Frases 480</a> | All Rights Reserved.<br/>
         Powered by <a href="https://www.rodrigopaszniuk.com/" rel="external">Rodrigo Paszniuk</a>.<br/>
         <a href="https://play.google.com/store/apps/details?id=com.frases480">
