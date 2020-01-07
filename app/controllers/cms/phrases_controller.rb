@@ -49,7 +49,7 @@ class CMS::PhrasesController < ApplicationController
           flash[:success] = 'La frase ha sido destruida.'
           redirect_to :cms_phrases
         else
-          flash[:error] = 'No pudimos destruir el registro, contactar con Rodrigo Paszniuk.'
+          flash[:error] = 'No pudimos destruir el registro, contactar con Frases 480.'
           redirect_to edit_cms_phrase_path(phrase)
         end
       else

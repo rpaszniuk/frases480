@@ -1,6 +1,23 @@
 default_cms_actions = [:index, :new, :create, :edit, :update, :destroy]
 
 Rails.application.routes.draw do
+  namespace :api, path: '', constraints: { subdomain: ['api'] }, defaults: { format: :json } do
+    namespace :v1 do
+      resources :phrases, only: [:index, :show]
+      resources :categories, only: [:index, :show]
+      namespace :users do
+        post 'sign-in'
+        post 'recover-password'
+        post '', action: :create, as: :create
+      end
+      namespace :me do
+        get '', action: :show, as: :show
+        put '', action: :update, as: :update
+        resources :phrases, only: [:index, :create, :show, :destroy, :update]
+      end
+    end
+  end
+
   namespace :cms, path: '', constraints: { subdomain: ['cms'] } do
     namespace :sessions, path: '' do
       post 'login'

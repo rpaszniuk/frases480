@@ -12,13 +12,29 @@ class UserAuth
     @signing_in = options[:signing_in] || true
   end
 
+  def do_sign_in
+    if self.valid?
+      self.user = User.includes(:secure_user).active.find_by(email: self.email)
+      if self.user.nil?
+        self.errors.add(:base, 'Credenciales no válidas.')
+      else
+        if self.user.secure_user.authenticate(self.password)
+          return true
+        else
+          self.errors.add(:base, 'Credenciales no válidas.')
+        end
+      end
+    end
+    false
+  end
+
   def login_successful?
     return false unless valid?
 
     self.user = User.active.includes(:secure_user).find_by(email: email.upcase)
     return true if !user.nil? && user.active? && user.secure_user.authenticate(password) && !user.access_profile.nil?
 
-    errors.add(:email, 'Invalid Credentials.')
+    errors.add(:email, 'Credenciales no válidas.')
     false
   end
 
