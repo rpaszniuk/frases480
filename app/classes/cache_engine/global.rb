@@ -47,8 +47,8 @@ module CacheEngine::Global
     cache_key = "web_phrases_page_#{page}"
     cache_data = CacheEngine.get(cache_key)
     if cache_data.nil?
-      cache_data = Phrase.active.order(id: :desc).includes(:category).paginate(page: page, per_page: 15).to_a
-      CacheEngine.set(cache_key, cache_data, page == 1 ? 12.hours : 2.minutes)
+      cache_data = Phrase.active.order(id: :desc).includes(:category).paginate(page: page, per_page: 20).to_a
+      CacheEngine.set(cache_key, cache_data, page == 1 ? 12.hours : 5.minutes)
     end
     cache_data
   end
@@ -70,8 +70,8 @@ module CacheEngine::Global
     cache_key = "web_#{category.id}_phrases_page_#{page}"
     cache_data = CacheEngine.get(cache_key)
     if cache_data.nil?
-      cache_data = category.phrases.active.order(id: :desc).paginate(page: page, per_page: 15).to_a
-      CacheEngine.set(cache_key, cache_data, page == 1 ? 3.hours : 2.minutes)
+      cache_data = category.phrases.active.order(id: :desc).paginate(page: page, per_page: 20).to_a
+      CacheEngine.set(cache_key, cache_data, page == 1 ? 6.hours : 3.minutes)
     end
     cache_data
   end

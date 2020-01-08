@@ -3,7 +3,8 @@ class API::V1::CategoriesController < ApplicationController
   before_action :is_authenticated?
 
   def index
-    categories = Category.active.order(:name)
+    cache_engine = CacheEngine.new
+    categories = cache_engine.web_categories
     render json: categories, each_serializer: API::V1::CategorySerializer, root: 'data', adapter: :json, status: :ok
   end
 
