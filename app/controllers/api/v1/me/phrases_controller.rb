@@ -7,6 +7,7 @@ class API::V1::Me::PhrasesController < ApplicationController
     page = (params[:page] || 1).to_i
 
     phrases = @request_user.phrases.order(created_at: :desc)
+    phrases = phrases.where('phrase LIKE :k', k: "%#{params[:q]}%")
     phrases = phrases.paginate(page: page, per_page: per_page)
 
     render json: phrases, each_serializer: API::V1::PhraseSerializer, status: :ok, root: 'data', adapter: :json, meta: {
