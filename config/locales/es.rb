@@ -258,6 +258,12 @@
       }
     },
 
+    will_paginate: {
+      previous_label: '&larr;',
+      next_label: '&rarr;',
+      page_gap: ' ... '
+    },
+
     basic: {
       forms: {
         submit_create: 'Crear',
