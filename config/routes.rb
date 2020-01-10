@@ -7,7 +7,6 @@ Rails.application.routes.draw do
       resources :categories, only: [:index, :show]
       namespace :users do
         post 'sign-in'
-        post 'recover-password'
         post '', action: :create, as: :create
       end
       namespace :me do
@@ -26,6 +25,8 @@ Rails.application.routes.draw do
       get 'sign_up'
       post 'forgot_password'
       post 'sign_up'
+      get '/recover_password/:secure_hash', action: :recover_password, as: :recover_password
+      patch 'change_password'
     end
 
     namespace :dashboard do

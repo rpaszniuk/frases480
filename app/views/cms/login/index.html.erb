@@ -10,7 +10,7 @@
             <%= form_for :user_auth, url: :cms_sessions_login, html: { role: 'form' } do |form| %>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
-                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
               </div>
               <%= text_field_tag 'user_auth[email]', @user_auth.email, class: 'form-control', placeholder: 'E-mail' %>
               <%= cms_show_errors_for(@user_auth, :email) %>

@@ -58,6 +58,25 @@ class CMS::SessionsController < ApplicationController
     end
   end
 
+  def recover_password
+    @secure_user = SecureUser.includes(:user).select(:user_id, :secure_hash, :secure_hash_expires_at).find_by(secure_hash: params[:secure_hash]) unless params[:secure_hash].blank?
+    @user = @secure_user.user if @secure_user
+  end
+
+  def change_password
+    @secure_user = SecureUser.find_by(secure_hash: params[:secure_hash])
+    raise ActiveRecord::RecordNotFound if @secure_user.nil?
+
+    @user = @secure_user.user
+    if @user.update_attributes(password_recovery_params)
+      flash[:success] = 'Tu contraseña se ha recuperado con éxito, ahora ya puedes iniciar sesión'
+      redirect_to cms_sessions_login_path
+    else
+      flash[:error] = 'Hubo un problema al intentar recuperar tu contraseña'
+      render :recover_password
+    end
+  end
+
   protected
 
   def user_params
@@ -66,5 +85,9 @@ class CMS::SessionsController < ApplicationController
 
   def user_auth_params
     params.require(:user_auth).permit(:email, :password)
+  end
+
+  def password_recovery_params
+    params.require(:user).permit(:password)
   end
 end

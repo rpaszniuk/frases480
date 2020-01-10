@@ -16,8 +16,6 @@ gem 'active_model_serializers', '~> 0.10.0'
 gem 'uglifier', '~> 4.1.20'
 gem 'jquery-rails', '~> 4.3.5'
 gem 'jquery-ui-rails', '~> 6.0.1'
-# It enables the creation of both simple and advanced search
-# forms for your Ruby on Rails application
 gem 'will_paginate', '~> 3.1.0'
 gem 'mini_magick', '~> 4.9.5'
 gem 'redis', '~> 4.1'
@@ -25,6 +23,7 @@ gem 'hiredis', '~> 0.6.3'
 gem 'sitemap_generator'
 gem 'sentry-raven'
 gem 'recaptcha'
+gem 'sendgrid-ruby'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

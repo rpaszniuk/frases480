@@ -41,10 +41,12 @@ class UserAuth
   def do_recover_password?
     if self.valid?
       self.user = User.includes(:secure_user).active.find_by(email: self.email)
-      if self.user.nil?
-        self.errors.add(:email, 'El usuario no existe o está inactivo.')
+      if !self.user.nil?
+        postman = Postman.new
+        return true if postman.send_password_recovery_email(email: self.user.email, secure_hash: self.user.secure_user.get_secure_hash)
+
+        self.errors.add(:email, :postman_error)
       else
-        # return true
         self.errors.add(:email, 'Error al recuperar contraseña. Intente nuevamente.')
       end
     end
