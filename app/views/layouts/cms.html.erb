@@ -8,7 +8,6 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag 'cms', media: 'all' %>
-  <%#= stylesheet_pack_tag 'cms', 'data-turbolinks-track': 'reload' %>  
   <%= yield :extra_top_page %>
 </head>
 <body class="app header-fixed sidebar-fixed aside-menu-fixed aside-menu-hidden">
@@ -89,7 +88,6 @@
     <span class="ml-auto">By <a href="https://www.rodrigopaszniuk.com">Rodrigo Paszniuk</a></span>
   </footer>
   <%= javascript_include_tag 'cms' %>
-  <%#= javascript_pack_tag 'cms', 'data-turbolinks-track': 'reload' %>
   <%= yield :extra_bottom_page %>
 </body>
 </html>
