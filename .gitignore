@@ -34,7 +34,6 @@ yarn-debug.log*
 .yarn-integrity
 yarn.lock
 
-/config/credentials/development.key
 /db/schema.rb
 /public/sitemaps/
 

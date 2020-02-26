@@ -53,7 +53,6 @@ Rails.application.routes.draw do
     namespace :main, path: '' do
       get :acerca, action: :about
       get :feed
-      # get :sitemap
     end
 
     resources :phrases, only: [:show, :index]
