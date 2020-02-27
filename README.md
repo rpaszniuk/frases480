@@ -3,9 +3,9 @@ Frases 480 is a project that aims to create a crowdsourced database of phrases.
 
 
 ## Project Parts
-* WEB (show phrases / categories)
-* CMS (manage phrases / categories)
-* API (manage phrases / categories)
+* WEB (show phrases / categories) - Demo: https://www.frases480.com
+* CMS (manage phrases / categories) - Demo: https://cms.frases480.com
+* API (manage phrases / categories) - Demo: https://api.frases480.com
 
 ## Requirements
 
