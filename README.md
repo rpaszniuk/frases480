@@ -47,7 +47,7 @@ redis:
   port: 6379
 ```
 
-Configurate database
+Configurate database (Example config/database_sample.yml)
 
 ```
 rake db:create
