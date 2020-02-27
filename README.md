@@ -1,24 +1,79 @@
-# README
+# Frases 480
+Frases 480 is a project that aims to create a crowdsourced database of phrases.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+## Project Parts
+* WEB (show phrases / categories)
+* CMS (manage phrases / categories)
+* API (manage phrases / categories)
 
-* Ruby version
+## Requirements
 
-* System dependencies
+### Main Requirements
+* Ruby 2.6+
+* MariaDB 10.4+
+* Redis 2.2+
+* Rails 6.0+
 
-* Configuration
 
-* Database creation
+## Instructions
 
-* Database initialization
+```
+git clone https://github.com/rpaszniuk/frases480.git
+rake app:update:bin
+bundle install
+```
 
-* How to run the test suite
+Configurate credentials: bin/rails credentials:edit
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+secret_key_base: 
 
-* Deployment instructions
+name: 'Frases 480'
+emails:
+  admin: ''
+  no_reply: ''
+sendgrid:
+  api_key: ''
+  sandbox: false
+  templates:
+    password_recovery: ''
+cookie_domain: ''
+web_host: ''
+cms_domain: ''
+app_secret: ''
+redis:
+  host: 'localhost'
+  port: 6379
+```
 
-* ...
+Configurate database
+
+```
+rake db:create
+rake db:migrate
+rake db:seed
+```
+
+## Optional
+
+MariaDB is recommended but you can use any database supported by Rails (e.g. Postgres, SQLite)
+
+## TODO
+
+- ~Ruby 2.6 support~
+- ~Rails 6 support~
+- Unit tests
+- Documentation(APIs, Configuration Options)
+
+## Contributing
+
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request
+
+## License
+
+This project is licensed under the terms of the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details
