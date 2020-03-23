@@ -1,6 +1,6 @@
 class API::V1::CategoriesController < ApplicationController
   include APIAccessControl
-  before_action :is_authenticated?
+  # before_action :is_authenticated?
 
   def index
     cache_engine = CacheEngine.new
