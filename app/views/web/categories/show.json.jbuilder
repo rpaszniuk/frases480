@@ -1,4 +1,4 @@
-json.(@category, :id, :description, :name)
+json.extract! @category, :id, :description, :name
 json.count @phrases_count
 json.url web_show_category_url(@category.slug)
 json.phrases(@phrases) do |phrase|
