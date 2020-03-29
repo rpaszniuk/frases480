@@ -33,6 +33,10 @@ module Newfrases480
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
+    # Default Url Options
+    Rails.application.routes.default_url_options[:host] = Newfrases480::Application.credentials.web_host
+    Rails.application.routes.default_url_options[:protocol] = Rails.env.development? ? 'http' : 'https'
+
     # Don't generate system test files.
     config.generators.system_tests = nil
     config.i18n.default_locale = :es
