@@ -13,9 +13,19 @@
 <div class="row">
   <div class="col-md-12">
     <div class="card">
-      <%= form_tag :cms_phrases, method: :get, class: 'form-horizontal' do |form| %>
+      <%= form_tag :cms_phrases, method: :get do |form| %>
       <div class="card-body">
-        <%= text_field_tag :k, params[:k], class: 'form-control', placeholder: 'Buscar por Nombre' %>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <%= text_field_tag :k, params[:k], class: 'form-control', placeholder: 'Buscar por frase' %>
+          </div>
+          <div class="form-group col-md-3">
+            <%= select_tag :category_id, options_for_select(Category.all.collect { |ap| [ap.name, ap.id] }, selected: params[:category_id]), { include_blank: false, class: 'form-control', prompt: 'Categoría' } %>
+          </div>           
+          <div class="form-group col-md-3">
+            <%= select_tag :status, options_for_select(Phrase.statuses_map, selected: params[:status]), { include_blank: false, class: 'form-control', prompt: 'Estado' } %>
+          </div>
+        </div>
       </div>
       <div class="card-footer">
         <button class="btn btn-sm btn-primary" type="submit" data-disable-with="<%= t('basic.forms.searching') %>"><%= t('basic.forms.submit_search') %></button>
@@ -24,6 +34,8 @@
     <% end %>
   </div>
 </div>
+
+
 <div class="row">
   <div class="col-md-12">
     <% if !@phrases.blank? && @phrases.length > 0 -%>
@@ -33,6 +45,9 @@
           <th>#</th>
           <th>Frase</th>
           <th>Categoría</th>
+          <% if @current_user.access_profile.can?(:full_access, :phrases) -%>
+          <th>Creado por</th>
+          <% end -%>
           <th>Estado</th>
         </tr>
       </thead>
@@ -41,7 +56,10 @@
         <tr>
           <td><%= phrase.id %></td>
           <td><%= link_to phrase.phrase, edit_cms_phrase_path(phrase) %></td>
-          <td><%= link_to phrase.category.name %></td>
+          <td><%= link_to phrase.category.name, edit_cms_category_path(phrase.category) %></td>
+          <% if @current_user.access_profile.can?(:full_access, :phrases) -%>
+          <td><%= link_to phrase.user.full_name, edit_cms_category_path(phrase.user.id) %></td>
+          <% end -%>
           <td><%= cms_object_status_label(phrase) %></td>
         </tr>
         <% end -%>

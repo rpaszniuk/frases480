@@ -21,12 +21,12 @@ class Phrase < ApplicationRecord
     "Frase de #{category.description}"
   end
 
-  def generate_slug
-    ActiveSupport::Inflector.transliterate(self.phrase).gsub(/[^a-zA-Z0-9 ]/, '').split(' ').first(10).join(' ')
-  end
-
   def self.statuses_map
     statuses.map { |v, _k| [I18n.t("models.phrase.status.#{v}"), v] }
+  end
+
+  def generate_slug
+    ActiveSupport::Inflector.transliterate(self.phrase).gsub(/[^a-zA-Z0-9 ]/, '').split(' ').first(10).join(' ')
   end
 
   def mark_as_deleted?
@@ -46,6 +46,7 @@ class Phrase < ApplicationRecord
 
   def clean_stuff
     self.slug = self.slug.parameterize
+    self.phrase.strip!
   end
 
   def clear_cache

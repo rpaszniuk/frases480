@@ -3,9 +3,11 @@ class CMS::PhrasesController < ApplicationController
   before_action :permissions_and_breadcrumbs
 
   def index
-    @phrases = Phrase.includes(:category)
+    @phrases = Phrase.includes(:category, :user)
     @phrases = @phrases.where(user_id: @current_user.id) unless @current_user.access_profile.can?(:full_access, :phrases)
     @phrases = @phrases.where('phrase LIKE :k', k: "%#{params[:k]}%") unless params[:k].blank?
+    @phrases = @phrases.where(category_id: params[:category_id]) unless params[:category_id].blank?
+    @phrases = @phrases.where(status: params[:status]) unless params[:status].blank?
     @phrases = @phrases.order(id: :desc).paginate(page: params[:page])
   end
 
