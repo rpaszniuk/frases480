@@ -23,6 +23,7 @@ gem 'sitemap_generator'
 gem 'sentry-raven'
 gem 'recaptcha'
 gem 'sendgrid-ruby'
+gem 'rack-cors'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
