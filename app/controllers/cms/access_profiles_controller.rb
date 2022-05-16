@@ -29,7 +29,7 @@ class CMS::AccessProfilesController < ApplicationController
 
   def update
     @access_profile = AccessProfile.active.find(params[:id])
-    if @access_profile.update_attributes(access_profile_params)
+    if @access_profile.update(access_profile_params)
       flash[:success] = 'El Perfil de Acceso ha sido actualizado.'
       redirect_to edit_cms_access_profile_path(@access_profile)
     else

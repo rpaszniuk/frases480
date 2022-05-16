@@ -7,7 +7,7 @@ class API::V1::MeController < ApplicationController
   end
 
   def update
-    if @request_user.update_attributes(user_params)
+    if @request_user.update(user_params)
       render json: @request_user, serializer: API::V1::UserSerializer, status: :ok
     else
       render json: { errors: @request_user.errors }, status: :unprocessable_entity

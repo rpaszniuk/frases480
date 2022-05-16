@@ -29,7 +29,7 @@ class CMS::CategoriesController < ApplicationController
 
   def update
     @category = Category.find(params[:id])
-    if @category.update_attributes(category_params)
+    if @category.update(category_params)
       flash[:success] = 'La categoría ha sido actualizada.'
       redirect_to edit_cms_category_path(@category)
     else

@@ -37,7 +37,7 @@ class API::V1::Me::PhrasesController < ApplicationController
 
   def update
     phrase = @request_user.phrases.find(params[:id])
-    if phrase.update_attributes(phrase_params)
+    if phrase.update(phrase_params)
       render json: phrase, serializer: API::V1::PhraseSerializer, status: :ok
     else
       render json: { errors: phrase.errors }, status: :unprocessable_entity

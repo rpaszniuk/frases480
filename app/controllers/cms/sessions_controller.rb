@@ -68,7 +68,7 @@ class CMS::SessionsController < ApplicationController
     raise ActiveRecord::RecordNotFound if @secure_user.nil?
 
     @user = @secure_user.user
-    if @user.update_attributes(password_recovery_params)
+    if @user.update(password_recovery_params)
       flash[:success] = 'Tu contraseña se ha recuperado con éxito, ahora ya puedes iniciar sesión'
       redirect_to cms_sessions_login_path
     else

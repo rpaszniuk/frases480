@@ -34,7 +34,7 @@ class CMS::PhrasesController < ApplicationController
 
   def update
     @phrase = @current_user.access_profile.can?(:full_access, :phrases) ? Phrase.find(params[:id]) : @current_user.phrases.find(params[:id])
-    if @phrase.update_attributes(phrase_params)
+    if @phrase.update(phrase_params)
       flash[:success] = 'La frase ha sido actualizada.'
       redirect_to edit_cms_phrase_path(@phrase)
     else

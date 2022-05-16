@@ -2,7 +2,7 @@ class CacheEngine
   include CacheEngine::Global
 
   def self.get(key)
-    data = Redis.current.get(key)
+    data = REDIS.get(key)
     Rails.logger.info("[CACHE] GET #{key} -> #{data.nil? ? 'missed' : 'ok'}")
     return nil unless data
 
@@ -15,20 +15,20 @@ class CacheEngine
 
   def self.set(key, value, expires_in = nil)
     if expires_in
-      Redis.current.setex(key, expires_in, Marshal.dump(value))
+      REDIS.setex(key, expires_in, Marshal.dump(value))
     else
-      Redis.current.set(key, Marshal.dump(value))
+      REDIS.set(key, Marshal.dump(value))
     end
   end
 
   def self.del(key)
-    Redis.current.del(key)
+    REDIS.del(key)
   end
 
   def self.wildcard_del(wildcard)
-    keys = Redis.current.keys(wildcard)
+    keys = REDIS.keys(wildcard)
     keys.each do |key|
-      Redis.current.del(key)
+      REDIS.del(key)
     end
   end
 end

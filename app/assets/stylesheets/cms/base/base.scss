@@ -10,10 +10,6 @@ html, body {
   margin: 0 auto;
 }
 
-.badge {
-  // font-size: 13px;
-}
-
 .breadcrumb {
   .breadcrumb-item {
     &.featured {
@@ -82,40 +78,3 @@ html, body {
   }
 }
 
-// Maps
-/* Google Maps */
-.google-map {
-  height: 300px;
-}
-.map-container{
-  height: 400px;
-  width: 100%;
-}
-.map-container-new{
-  height: 260px;
-  width: 100%;
-}
-#map{
- height: 100%;
- width: 100%;
-}
-#workmap{
- height: 100%;
- width: 100%;
-}
-#pac-input{
-  position: absolute;
-  right: 10px !important;
-  top: 10px !important;
-  width: 200px;
-}
-#pac-input-2{
-  position: absolute;
-  right: 10px !important;
-  top: 10px !important;
-  width: 200px;
-}
-
-.no-break-word {
-  white-space: nowrap;
-}

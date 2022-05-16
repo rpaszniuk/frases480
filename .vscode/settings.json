@@ -1,0 +1,8 @@
+{
+    "search.useIgnoreFiles": false,
+    "solargraph.useBundler": true,
+    "thunder-client.workspaceRelativePath": "doc",
+    "ruby.format": "rubocop",
+    "thunder-client.saveToWorkspace": true,
+    "ruby.rubocop.onSave": true
+}
