@@ -1,6 +1,5 @@
 class API::V1::CategoriesController < ApplicationController
   include APIAccessControl
-  # before_action :is_authenticated?
 
   def index
     cache_engine = CacheEngine.new
@@ -26,8 +25,8 @@ class API::V1::CategoriesController < ApplicationController
       category: API::V1::CategorySerializer.new(category),
       total: phrases.total_entries,
       per_page: per_page,
-      next: phrases.next_page ? api_v1_phrases_path(page: phrases.next_page) : nil,
-      previous: phrases.previous_page ? api_v1_phrases_path(page: phrases.previous_page) : nil,
+      next: phrases.next_page ? api_v1_category_path(page: phrases.next_page) : nil,
+      previous: phrases.previous_page ? api_v1_category_path(page: phrases.previous_page) : nil,
       next_page: phrases.next_page,
       previous_page: phrases.previous_page
     }

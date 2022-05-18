@@ -1,19 +1,19 @@
 {
   en: {
-    search: "Search",
-    login: "Login",
-    profile: "Profile",
-    edit_profile: "Edit Profile",
-    edit: "Edit",
-    new: "New",
-    delete: "Delete",
-    update: "Update",
-    logout: "Log out",
-    register: "Register",
-    categories: "Categories",
-    last_added_phrases: "Latest added phrases",
-    reset_password: "Send me reset password instructions",
-    forgot_password: "Forgot your password?",
+    search: 'Search',
+    login: 'Login',
+    profile: 'Profile',
+    edit_profile: 'Edit Profile',
+    edit: 'Edit',
+    new: 'New',
+    delete: 'Delete',
+    update: 'Update',
+    logout: 'Log out',
+    register: 'Register',
+    categories: 'Categories',
+    last_added_phrases: 'Latest added phrases',
+    reset_password: 'Send me reset password instructions',
+    forgot_password: 'Forgot your password?',
     config: {
       cms: {
         default_title: 'Frases 480'
@@ -21,16 +21,16 @@
     },
 
     date: {
-      abbr_day_names: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      abbr_day_names: %w[Sun Mon Tue Wed Thu Fri Sat],
       abbr_month_names: [nil, 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-      day_names: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      day_names: %w[Sunday Monday Tuesday Wednesday Thursday Friday Saturday],
       formats: {
         default: '%Y-%m-%d',
         long: ->(date, _) { "%B #{date.day.ordinalize}, %Y" },
         short: '%b %d',
         complete: '%a, %d %B %Y',
         month_day_ord: ->(date, _) { "%b #{date.day.ordinalize}" },
-        full_month_day_ord: ->(date, _) { "%B #{date.day.ordinalize}" },
+        full_month_day_ord: ->(date, _) { "%B #{date.day.ordinalize}" }
       },
       month_names: [nil, 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
       order: [:year, :month, :day]

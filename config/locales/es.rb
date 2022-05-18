@@ -1,19 +1,19 @@
 {
   es: {
-    search: "Buscar",
-    login: "Loguear",
-    profile: "Perfil",
-    edit_profile: "Editar Perfil",
-    edit: "Editar",
-    new: "Nuevo",
-    delete: "Borrar",
-    update: "Actualizar",
-    logout: "Cerrar sesión",
-    register: "Registrarse",
-    categories: "Categorias",
-    last_added_phrases: "Últimas frases añadidas",
-    reset_password: "Enviarme las instrucciones para recuperar contraseña",
-    forgot_password: "¿Olvidaste tu contraseña?",
+    search: 'Buscar',
+    login: 'Loguear',
+    profile: 'Perfil',
+    edit_profile: 'Editar Perfil',
+    edit: 'Editar',
+    new: 'Nuevo',
+    delete: 'Borrar',
+    update: 'Actualizar',
+    logout: 'Cerrar sesión',
+    register: 'Registrarse',
+    categories: 'Categorias',
+    last_added_phrases: 'Últimas frases añadidas',
+    reset_password: 'Enviarme las instrucciones para recuperar contraseña',
+    forgot_password: '¿Olvidaste tu contraseña?',
     config: {
       cms: {
         default_title: 'Frases 480'
@@ -251,6 +251,23 @@
                 no_user_found: 'No pudimos encontrar un usuario con ese email',
                 no_access_profile_associated: 'El usuario no tiene un perfil de acceso asaciado',
                 inactive: 'El usuario no esta activo.'
+              }
+            }
+          }
+        }
+      }
+    },
+
+    activerecord: {
+      errors: {
+        models: {
+          phrase: {
+            attributes: {
+              user: {
+                required: 'es requerido'
+              },
+              category: {
+                required: 'es requerido'
               }
             }
           }

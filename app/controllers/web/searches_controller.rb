@@ -4,13 +4,13 @@ class WEB::SearchesController < ApplicationController
   def phrases
     @page_title = 'Buscar'
     search do
-      Phrase.where("phrase LIKE :t",{ t: "%#{params[:q]}%" }).includes(:category).paginate(page: params[:page], per_page: 15)
+      Phrase.where('phrase LIKE :t', { t: "%#{params[:q]}%" }).includes(:category).paginate(page: params[:page], per_page: 15)
     end
   end
 
   def phrases_count
     search do
-      Phrase.where("phrase LIKE :t",{ t: "%#{params[:q]}%" }).count
+      Phrase.where('phrase LIKE :t', { t: "%#{params[:q]}%" }).count
     end
   end
 

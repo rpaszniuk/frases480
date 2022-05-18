@@ -4,8 +4,8 @@ class Phrase < ApplicationRecord
 
   enum status: [:active, :pending, :rejected, :deleted]
 
+  validates_presence_of :category, :user
   validates :phrase, presence: true, length: { minimum: 30, maximum: 480 }
-  validates :category_id, presence: true
   validates :phrase, uniqueness: { case_sensitive: false }, if: -> { phrase_changed? }
   validates :slug, uniqueness: { case_sensitive: true }, if: -> { slug_changed? }
 

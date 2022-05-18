@@ -57,7 +57,10 @@ Rails.application.routes.draw do
 
     resources :phrases, only: [:show, :index]
     resources :categories, only: [:show, :index]
-    get 'search/:action' => 'searches#:action'
+    namespace :searches, path: 'search' do
+      get :phrases
+      get :phrases_count
+    end
     get '/:id', controller: :categories, action: :show, as: :show_category
     get '/:id/:phrase', controller: :phrases, action: :show, as: :show_phrase
     get '/', action: :index, controller: :main, as: :root

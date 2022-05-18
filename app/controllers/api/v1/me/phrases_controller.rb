@@ -1,6 +1,6 @@
 class API::V1::Me::PhrasesController < ApplicationController
   include APIAccessControl
-  before_action :is_authenticated?
+  before_action :authenticated?
 
   def index
     per_page = 20

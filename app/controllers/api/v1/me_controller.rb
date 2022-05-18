@@ -1,6 +1,6 @@
 class API::V1::MeController < ApplicationController
   include APIAccessControl
-  before_action :is_authenticated?
+  before_action :authenticated?
 
   def show
     render json: @request_user, serializer: API::V1::UserSerializer, status: :ok
