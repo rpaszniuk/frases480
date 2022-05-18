@@ -10,11 +10,11 @@ Frases 480 is a project that aims to create a crowdsourced database of phrases.
 ## Requirements
 
 ### Main Requirements
-* Ruby 2.6+
-* MariaDB 10.4+
-* Redis 2.2+
-* Rails 6.0+
-
+* Rails 6.1.4
+* Ruby 3.0.0
+* NodeJS 12
+* Yarn >= 1
+* MariaDB >= 10.4
 
 ## Instructions
 
@@ -55,15 +55,13 @@ rake db:migrate
 rake db:seed
 ```
 
-## Optional
+## RSpec (testing tool for Ruby)
 
-MariaDB is recommended but you can use any database supported by Rails (e.g. Postgres, SQLite)
+- bundle exec rspec
 
 ## TODO
 
-- ~Ruby 2.6 support~
-- ~Rails 6 support~
-- Unit tests
+- Add Unit tests
 - Documentation(APIs, Configuration Options)
 
 ## Contributing
