@@ -44,3 +44,5 @@ yarn.lock
 
 /Gemfile.lock
 /public/sitemap.xml.gz
+/swagger/**
+doc/thunder-tests/thunderEnvironment.db

@@ -40,8 +40,12 @@ sendgrid:
     password_recovery: ''
 cookie_domain: ''
 web_host: ''
+api_host: ''
 cms_domain: ''
 app_secret: ''
+rswag:
+  username: ''
+  password: ''
 redis:
   host: 'localhost'
   port: 6379
@@ -59,10 +63,17 @@ rake db:seed
 
 - bundle exec rspec
 
+## API Documentation
+
+To generate swagger documentation first create a test database then run `rake rswag:specs:swaggerize`
+
+You should be able to see the documentation at `/api-docs`
+
 ## TODO
 
-- Add Unit tests
-- Documentation(APIs, Configuration Options)
+- Migrate to Rails 7
+- Add more Unit tests
+- Finish Documentation (APIs, Configuration Options)
 
 ## Contributing
 

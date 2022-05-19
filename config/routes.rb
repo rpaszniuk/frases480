@@ -1,6 +1,10 @@
 default_cms_actions = [:index, :new, :create, :edit, :update, :destroy]
 
 Rails.application.routes.draw do
+  if Rails.env.development? || Rails.env.test?
+    mount Rswag::Ui::Engine => '/api-docs'
+    mount Rswag::Api::Engine => '/api-docs'
+  end
   namespace :api, path: '', constraints: { subdomain: ['api'] }, defaults: { format: :json } do
     namespace :v1 do
       resources :phrases, only: [:index, :show]
