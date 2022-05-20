@@ -6,7 +6,6 @@ ruby '3.0.0'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 gem 'mysql2', '~> 0.5'
 
-gem 'mini_racer'
 gem 'bootstrap', '~> 4.3.1'
 gem 'sass-rails', '~> 5'
 gem 'webpacker', '~> 4.0'
