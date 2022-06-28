@@ -57,6 +57,10 @@ Rails.application.routes.draw do
     namespace :main, path: '' do
       get :acerca, action: :about
       get :feed
+      get 'privacy-policy', action: :privacy_policy
+      get 'cookie-policy', action: :cookie_policy
+      get 'terms-of-use', action: :terms_of_use
+      get 'disclaimer', action: :disclaimer
     end
 
     resources :phrases, only: [:show, :index]

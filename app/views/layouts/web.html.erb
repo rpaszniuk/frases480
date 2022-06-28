@@ -42,19 +42,45 @@
     <%= yield :extra_bottom_page %>
   </main>
   <!-- Footer -->
-  <footer role="footer" id="footer">
-    <div class="card bg-light text-center">
-      <div class="card-body">
-        ¿Te gustaría ser colaborador de Frases 480? <a href="https://cms.frases480.com" rel="external">Ir al CMS</a><br/>
-        Copyright &copy; <%= Date.today.year %>  <a href="mailto:info@frases480.com">Frases 480</a> | All Rights Reserved.<br/>
-        Powered by <a href="https://www.rodrigopaszniuk.com/" rel="external">Rodrigo Paszniuk</a>.<br/>
-        <a href="https://play.google.com/store/apps/details?id=com.frases480">
-          <img alt="Android app on Google Play"
-          src="https://developer.android.com/images/brand/es-419_app_rgb_wo_45.png" />
-        </a>
+  <footer class="bg-dark py-5 mt-auto">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <p class="text-muted mt-4">
+            ¿Te gustaría ser colaborador de Frases 480? <a href="https://cms.frases480.com" rel="external">Ir al CMS</a>
+          </p>
+        </div>
+        <div class="col-lg-3 mt-3 mt-lg-0">
+          <h5 class="text-light">Links</h5>
+          <ul class="list-unstyled ps-0 mb-0 mt-3">
+            <li class="mt-2"><%= link_to 'Terms of Use', :web_main_terms_of_use, class: 'text-muted' %></li>
+            <li class="mt-2"><%= link_to 'Privacy Policy', :web_main_privacy_policy, class: 'text-muted' %></li>
+            <li class="mt-2"><%= link_to 'Cookie Policy', :web_main_cookie_policy, class: 'text-muted' %></li>
+            <li class="mt-2"><%= link_to 'Disclaimer', :web_main_disclaimer, class: 'text-muted' %></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 mt-3 mt-lg-0">
+          <h5 class="text-light">Apps</h5>
+          <ul class="list-unstyled ps-0 mb-0 mt-3">
+            <li>
+              <a href="https://play.google.com/store/apps/details?id=com.frases480">
+                <img alt="Android app on Google Play"
+                src="https://developer.android.com/images/brand/es-419_app_rgb_wo_45.png" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="mt-5">
+            <p class="text-muted mt-4 text-center mb-0">© <%= Date.today.year%> Frases 480 - frases480.com</p>
+          </div>
+        </div>
       </div>
     </div>
   </footer>
+  <!-- END FOOTER -->  
   <%= javascript_pack_tag 'web' %>
    <!-- Go to www.addthis.com/dashboard to customize your tools -->
   <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-541c5291346b41da"></script>
@@ -92,6 +118,13 @@
 
   var ml_account = ml('accounts', '638327', 'v9y9p4w1s8', 'load');
   </script>
+  <!-- Termly -->
+  <script
+  type="text/javascript"
+  src="https://app.termly.io/embed.min.js"
+  data-auto-block="on"
+  data-website-uuid="7943731c-cb92-44f2-b4fe-a1578f4d2e54"
+  ></script>
   <!-- Google Analytics -->
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
