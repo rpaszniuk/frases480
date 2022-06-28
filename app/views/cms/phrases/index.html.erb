@@ -56,9 +56,9 @@
         <tr>
           <td><%= phrase.id %></td>
           <td><%= link_to phrase.phrase, edit_cms_phrase_path(phrase) %></td>
-          <td><%= link_to phrase.category.name, edit_cms_category_path(phrase.category) %></td>
+          <td><%= link_to phrase.category.name, edit_cms_category_path(phrase.category_id) %></td>
           <% if @current_user.access_profile.can?(:full_access, :phrases) -%>
-          <td><%= link_to phrase.user.full_name, edit_cms_category_path(phrase.user.id) %></td>
+          <td><%= link_to phrase.user.full_name, edit_cms_user_path(phrase.user_id) %></td>
           <% end -%>
           <td><%= cms_object_status_label(phrase) %></td>
         </tr>
