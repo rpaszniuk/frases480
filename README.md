@@ -22,6 +22,7 @@ Frases 480 is a project that aims to create a crowdsourced database of phrases.
 git clone https://github.com/rpaszniuk/frases480.git
 rake app:update:bin
 bundle install
+./bin/rails webpacker:install
 ```
 
 Configurate credentials: bin/rails credentials:edit
