@@ -4,7 +4,7 @@ class WEB::MainController < ApplicationController
   def index
     @cache_engine = CacheEngine.new
     @categories = @cache_engine.web_categories
-    @phrases =  @cache_engine.web_phrases(params[:page])
+    @phrases = @cache_engine.web_phrases(params[:page])
   end
 
   def about

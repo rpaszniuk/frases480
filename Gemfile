@@ -58,4 +58,7 @@ group :development, :test do
   gem 'rswag'
   gem 'rspec-rails'
   gem 'rswag-specs'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'webdrivers', '~> 4.0', require: false
 end

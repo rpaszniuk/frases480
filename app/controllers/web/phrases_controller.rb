@@ -17,6 +17,8 @@ class WEB::PhrasesController < ApplicationController
   # GET /phrases/1
   # GET /phrases/1.json
   def show
+    return render file: "#{Rails.root}/public/404.html", status: 404, layout: false unless @phrase
+
     @page_title = @phrase.title
   end
 
@@ -28,7 +30,7 @@ class WEB::PhrasesController < ApplicationController
       @phrase = Phrase.includes(:category).find(id_or_slug)
       redirect_to web_show_phrase_path(@phrase.category.slug, @phrase.slug), status: 301
     else
-      @phrase = Phrase.includes(:category).find_by!(slug: id_or_slug)
+      @phrase = Phrase.includes(:category).find_by(slug: id_or_slug)
     end
   end
 end
